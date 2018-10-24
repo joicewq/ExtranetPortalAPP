@@ -68,11 +68,11 @@ function initLogoInfo(){
               </div>
               <div class="footer-info-wrap">
                 <div>
-                  <div id="remarkTwo" class="display-inline-block" >单位地址：{{remarkTwo}}</div><!--{{obj.adds}}-->
-                  <div id="remarkThr" class="display-inline-block ml15" >邮政编码：{{remarkThr}}</div>
+                  <div id="remarkTwo" class="display-inline-block" >单位地址：</div><!--{{obj.adds}}-->
+                  <div id="remarkThr" class="display-inline-block ml15" >邮政编码：</div>
                 </div>
-                <div id="remarkFour">技术支持：{{remarkFour}}</div>
-                <div id="remarkFive">版权所有：{{remarkFive}}</div>
+                <div id="remarkFour">技术支持：</div>
+                <div id="remarkFive">版权所有：</div>
               </div>
             </div>
           </div>
