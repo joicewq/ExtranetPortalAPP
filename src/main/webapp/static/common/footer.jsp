@@ -7,8 +7,7 @@ $(document).ready(function(){
 	$.post("/portal/getEnv",{},
 	function(data,status){	
 		docUrl=data.docAppUrl+docUrl; 
-	});	 
-	
+	});	 	
 	//请求模板	 
 	$.post("/portal/queryTemplete",{
 		testLink: window.location.origin
