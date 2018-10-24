@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+  default-autowire="byName">
+  
+  <!-- 添加调度的任务bean 配置对应的class-->
+  <bean id="createHtmlSchedule" class="com.gdsalt.app.tradeplatform.controller.HtmlController" />
+  
+  <!--配置调度具体执行的方法-->
+  <!-- ①生成首页Html -->
+  <bean id="createHomeTask"	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="createHtmlSchedule" /><!-- 调用的类 -->
+    <property name="targetMethod" value="createHome"/><!-- 调用的方法 -->
+    <property name="concurrent" value="false" /><!-- 多个job不会并发运行,第二个job将不会在第一个job完成之前开始 -->
+  </bean>
+  
+  <!-- ②生成企业Html -->
+  <bean id="createCompanyTask"	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="createHtmlSchedule" /><!-- 调用的类 -->
+    <property name="targetMethod" value="createCompany"/><!-- 调用的方法 -->
+    <property name="concurrent" value="false" /><!-- 多个job不会并发运行,第二个job将不会在第一个job完成之前开始 -->
+  </bean>
+  
+  <!-- ③生成供应Html -->
+  <bean id="createSellTask"	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="createHtmlSchedule" /><!-- 调用的类 -->
+    <property name="targetMethod" value="createSell"/><!-- 调用的方法 -->
+    <property name="concurrent" value="false" /><!-- 多个job不会并发运行,第二个job将不会在第一个job完成之前开始 -->
+  </bean>
+  
+  <!-- ④生成采购Html -->
+    <bean id="createPurTask"	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="createHtmlSchedule" /><!-- 调用的类 -->
+    <property name="targetMethod" value="createPurchase"/><!-- 调用的方法 -->
+    <property name="concurrent" value="false" /><!-- 多个job不会并发运行,第二个job将不会在第一个job完成之前开始 -->
+  </bean>
+  
+  <!--配置调度执行的触发的时间-->
+  <bean id="createHomeTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="createHomeTask" />
+    <property name="cronExpression">
+      <value>0 */20 * * * ?</value><!-- 每半小时 -->
+    </property>
+  </bean>
+  
+  <bean id="createCompanyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="createCompanyTask" />
+    <property name="cronExpression">
+      <value>0 */30 * * * ?</value><!-- 每半小时 -->
+    </property>
+  </bean>
+  
+  <bean id="createSellTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="createSellTask" />
+    <property name="cronExpression">
+      <value>0 */15 * * * ?</value><!-- 每半小时 -->
+    </property>
+  </bean>
+  
+  <bean id="createPurTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="createPurTask" />
+    <property name="cronExpression">
+      <value>0 */15 * * * ?</value><!-- 每半小时 -->
+    </property>
+  </bean>
+  
+  <!-- quartz的调度工厂 调度工厂只能有一个，多个调度任务在list中添加 -->
+  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+         <!-- 所有的调度列表-->
+<!--         <ref local="createHomeTrigger" /> -->
+<!--         <ref local="createCompanyTrigger" /> -->
+<!--         <ref local="createSellTrigger" /> -->
+<!--         <ref local="createPurTrigger" /> -->
+      </list>
+    </property>
+  </bean>
+</beans>

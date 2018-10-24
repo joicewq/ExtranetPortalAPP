@@ -1,0 +1,49 @@
+{
+	"message": [
+		{
+			"verityId":"001",
+			"verityName":"工业精制盐"
+		},
+		{
+			"verityId":"002",
+			"verityName":"液体工业盐"
+		},
+		{
+			"verityId":"003",
+			"verityName":"工业日晒盐"
+		},
+		{
+			"verityId":"004",
+			"verityName":"渔盐"
+		},
+		{
+			"verityId":"005",
+			"verityName":"畜牧盐"
+		},
+		{
+			"verityId":"006",
+			"verityName":"生活盐"
+		},
+		{
+			"verityId":"007",
+			"verityName":"食用精制盐"
+		},
+		{
+			"verityId":"008",
+			"verityName":"食用海盐"
+		},
+		{
+			"verityId":"009",
+			"verityName":"食用海精盐"
+		},
+		{
+			"verityId":"010",
+			"verityName":"食用粉洗盐"
+		},
+		{
+			"verityId":"011",
+			"verityName":"食用多品种盐"
+		}
+	],
+	"result": 1
+}

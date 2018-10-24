@@ -1,0 +1,15 @@
+{
+	"title": "政策法规",
+	"icon":"iconfont icon-yytb-dangfenglianzhengjianshe",
+	"menu":[
+
+		{
+			"name": "国家政策法规",
+			"url": "/vipcenter/mycontract"
+		},
+		{
+			"name": "地方政策法规",
+			"url": "/prodlib/index"
+		}
+	]
+}

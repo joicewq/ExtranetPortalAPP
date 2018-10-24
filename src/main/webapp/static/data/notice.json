@@ -1,0 +1,41 @@
+{
+	"result": 1,
+	"message": {
+		"startRow": 1,
+		"lastPage": 1,
+		"navigatepageNums": [1],
+		"prePage": 0,
+		"hasNextPage": false,
+		"nextPage": 0,
+		"pageSize": 6,
+		"endRow": 3,
+		"list": [{
+			"notContent": "近日，伴随着响亮的敲锣声，沈阳康洪粮油有限公司正式在辽宁省沈阳市和平区挂牌上市，公司高层领导全部出了此次挂牌仪式。让我们热切热烈庆祝沈阳康洪粮油有限公司上市。",
+			"createUser": "ecom000092bfd31d1624416593e36f63b02b96bd",
+			"notId": "ecom000053ee6728265d40f9b88bc8bc64f90126",
+			"notTitle": "热烈庆祝沈阳康洪粮油有限公司上市",
+			"createDate": 1470105897000
+		}, {
+			"notContent": "近期，由于黑龙江省北大荒集团公司内部人员进行调整，于本月22日技能型中层职位公开竞聘，有意者请联系王女士：1332112312",
+			"createUser": "ecom000092bfd31d1624416593e36f63b02b96bd",
+			"notId": "ecom0000d78efcd0db784fcbb18f5a8be696eb49",
+			"notTitle": "黑龙江省北大荒集团中层职位公开竞聘通知",
+			"createDate": 1470105397000
+		}, {
+			"notContent": "大水无情人有情，目前部分地区洪水泛滥，大家在享受幸福生活的同时，是否应该多为灾区的小伙伴们着想一下，现在我们将开展一场募捐活动，希望大家可以展开自己的援助之手，有意的小伙伴们请联系王女士：XXXXXXXXXXX，我们期待您的爱心",
+			"createUser": "ecom000092bfd31d1624416593e36f63b02b96bd",
+			"notId": "ecom000085886d421e324cf3a37e3a38cd00dd21",
+			"notTitle": "爱心馈赠",
+			"createDate": 1470104988000
+		}],
+		"pageNum": 1,
+		"navigatePages": 8,
+		"total": 3,
+		"pages": 1,
+		"size": 3,
+		"firstPage": 1,
+		"isLastPage": true,
+		"hasPreviousPage": false,
+		"isFirstPage": true
+	}
+}

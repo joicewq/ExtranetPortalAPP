@@ -1,0 +1,210 @@
+.ds-banner-login {
+  width: 315px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+.ds-login-ul > li {
+  margin: 20px;
+  position: relative;
+}
+.ds-login-h3 {
+  font-size: 18px;
+}
+.ds-login-input {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #d8dde6;
+  border-radius: 4px;
+  background: #f8f8f8;
+  padding-left: 35px;
+}
+.ds-forget-passd {
+  color: #666;
+}
+.ds-login-btn {
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  background: #ff7800;
+  border: 0;
+  border-radius: 4px;
+  font-size: 18px;
+}
+.ds-login-cent-qh {
+	width: 100% ;
+	background: #4c7ae6 ;
+	background-image: url("/static/images/login.png")
+	}
+
+.ds-login-center {
+	position: relative;
+	width:1200px;
+	height:475px;
+	margin:0 auto;
+	}
+.ds-login-title{
+	position: absolute;
+	top: 90px;
+	left: 350px;
+	font-size: 28px;
+	color: #fff;
+}
+.ds-login-left {
+	float:left;
+	width: 500px ;
+	height:290px;
+	text-align: center ;
+	margin-top: 70px ;
+	}
+
+.ds-login-right {
+	float:right;
+	width:350px;
+	height:370px;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 30px ;
+	margin-top: 55px ;
+	}
+
+.ds-login-right .ds-right-center {
+	}/*login change*/
+
+.ds-login-right .ds-right-title span{
+	text-align:left;
+	padding:5px 5px 5px 0;
+	color:#666;
+	font-size:20px;
+	font-weight:500;
+	}
+
+.ds-login-right .ds-right-title a {
+	float:right;
+	line-height:32px;
+	font-size:14px;
+	color:#ff7800;
+	cursor:pointer;
+	}
+.ds-login-right .ds-right-title a:hover {
+	text-decoration:underline !important;
+	}
+.ds-login-right a.ds-right-button {
+	display:block;
+	padding:7px;
+	text-align:center;
+	color:#fff;
+	font-size:18px;
+	background: #4c7ae6;
+	height:40px;
+	border-radius: 5px;
+	cursor: pointer;
+	}
+.ds-login-right a.ds-right-button:hover {
+	background-color:#0d619d;
+	}
+
+.ds-login-foot {
+	width:100%;
+	}
+
+.ds-login-foot-list {
+	width:1200px;
+	margin:0 auto;
+	}
+	
+.ds-login-foot-list p {
+	text-align:center;
+	color:#666;
+	}
+
+.ds-login-foot-list p a {
+	padding:5px;
+	color:#666;
+	cursor: pointer;
+	}
+.ds-login-foot-list p a:hover {
+	color:#ff7800;
+	}
+
+.ds-right-from-number {
+	padding:10px;
+	background-color:#fff;
+	border-radius: 5px;
+	height:40px;
+	border:1px solid #ccc;
+	}
+
+.ds-right-from-number img {
+	float:left;
+	}
+
+.ds-right-from-number input.ds-right-number {
+	float:left;
+	margin-left:5px;
+	width:210px;
+	border:0;
+	background:none;
+	color:#afafaf;
+	font-size:14px;
+	height: auto !important;
+    line-height: inherit !important;
+	}
+
+.ds-right-from-password {
+	padding:10px;
+	background-color:#fff;
+	border-radius: 5px;
+	height:40px;
+	border:1px solid #ccc;
+	}
+
+.ds-right-from-password img {
+	float:left;
+	}
+
+.ds-right-from-password input.ds-right-password {
+	float:left;
+	margin-left:5px;
+	width:210px;
+	border:0;
+	background:none;
+	color:#afafaf;
+	font-size:14px;
+	height: auto !important;
+    line-height: inherit !important;
+	}
+
+.ds-right-remember input.ds-right-fruit {
+	float:left;
+	margin-top:4px;
+	margin-right:4px;
+	}
+
+.ds-right-remember span.ds-right-number {
+	color:#666;
+	}
+
+.ds-right-remember a.ds-right-password {
+	color:#666;
+	float:right;
+	cursor: pointer;
+	text-decoration:underline !important;
+	}
+#loginForm .form-tips {
+	display: inline-block;
+	margin-top: 10px;
+}
+.ds-right-remember a.ds-right-password:hover {
+	color:#134ea5;
+	}
+@media (max-width: 1200px){
+	.ds-login-ul > li {
+	  margin: 15px;
+	}
+	
+}

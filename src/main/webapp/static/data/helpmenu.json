@@ -1,0 +1,38 @@
+[
+	{
+		"title": "帮助中心",
+		"menu" : [
+			{
+				"name": "注册流程",
+				"url": "/help/register",
+				"id": "register"
+			},
+			{
+				"name": "企业备案流程",
+				"url": "/help/company",
+				"id": "company"
+			},
+			{
+				"name": "产品备案流程",
+				"url": "/help/product",
+				"id": "product"
+			},
+			{
+				"name": "防伪追溯查询流程",
+				"url": "/help/checkproduct",
+				"id": "checkproduct"
+			},
+			{
+				"name": "举报投诉流程",
+				"url": "/help/complain",
+				"id": "complain"
+			},
+			{
+				"name": "监管-追溯接口协议标准",
+				"url": "/help/protocol",
+				"id": "protocol"
+			}
+		]
+	}
+	
+]
