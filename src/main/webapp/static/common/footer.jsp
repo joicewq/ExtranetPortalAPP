@@ -33,8 +33,7 @@ function initLogoInfo(){
 	 $("#remarkThr").html("邮政编码："+reslutData.remarkThr);
 	 $("#remarkFour").html("技术支持："+reslutData.remarkFour);
 	 $("#remarkFive").html("版权所有："+reslutData.remarkFive);	 
-	 $("#twoCodeId").attr("src",docUrl+reslutData.twoCodeId);		 
-	 
+	 $("#twoCodeId").attr("src",docUrl+reslutData.twoCodeId);	 
 	});	
 }
 	$.post("/portal/initBolgroll",{
@@ -47,8 +46,7 @@ function initLogoInfo(){
 		 links.forEach((item,index,arr)=>{       	
 		     lis+="<li><a href="+item.url+" target='_blank'>"+item.name+"</a></li>";   	     	    	
 			}); 		
-		 $("ul").html(lis);		        
-		    
+		 $(".footer-links").html(lis);        
 		});	
    
 });
