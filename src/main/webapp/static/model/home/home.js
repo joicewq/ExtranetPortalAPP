@@ -284,10 +284,10 @@ require(["jquery","tab"],function($,flexslider){
 								element.list=dataArray;
 								if(element.visualizationColumn==="1"){
 									columnOne.push(element);
-								}									
+								}												
 								if(element.visualizationColumn==="3"){
-									console.info("visualizationColumn:",element.visualizationColumn);
-									columnThr.push("element",element);
+//									columnThr.push("element",element);
+									columnThr.push(element);
 								}
 								if(len=== length-1){
 									columnOne.sort(compare('sort'));									 
@@ -313,7 +313,8 @@ require(["jquery","tab"],function($,flexslider){
 //		console.info("initPageDate");		
 		var columnOneData="",columnThrData="";
 		
-		columnOne.forEach((item,index,arr)=>{ 
+	    $.each(columnOne,function(index,item){ 
+//		columnOne.forEach((item,index,arr)=>{ 
 			var style="<div class='module module-min module-border'>"+
 				"<div class='module-title-wrap'>"+
 					"<span class='module-title-primary'></span>"+
@@ -325,7 +326,8 @@ require(["jquery","tab"],function($,flexslider){
 			var newsContone="<div class='module-content-wrap' id='company-publicity'>"+
 					"<ul class='news-list'>";
 			if(!isEmpty(item.list))
-			 item.list.forEach((itemList,index,arr)=>{ 				 
+		      $.each(item.list,function(index,itemList){ 
+//			 item.list.forEach((itemList,index,arr)=>{ 				 
                  var li="";
                  li+="<li>" +
                  		"<a v-bind:href='#' target='_blank' class='news-title' >"+itemList.title+"</a>"+
@@ -341,7 +343,9 @@ require(["jquery","tab"],function($,flexslider){
 			columnOneData+=style; 	   			 
 			});		
 		
-		columnThr.forEach((item,index,arr)=>{ 
+	    $.each(columnThr,function(index,item){ 
+//	    	console.info("columnThr item:",item);
+//		columnThr.forEach((item,index,arr)=>{ 
 			var style="<div class='module module-min module-border'>"+
 				"<div class='module-title-wrap'>"+
 					"<span class='module-title-primary'></span>"+
@@ -353,7 +357,7 @@ require(["jquery","tab"],function($,flexslider){
 			var newsContone="<div class='module-content-wrap' id='company-publicity'>"+
 					"<ul class='news-list'>";
 			if(!isEmpty(item.list))
-			 item.list.forEach((itemList,index,arr)=>{ 				 
+			 $.each(item.list,function(index,itemList){  			 		 
                  var li="";
                  li+="<li>" +
                  		"<a v-bind:href='#' target='_blank' class='news-title' >"+itemList.title+"</a>"+
