@@ -34,26 +34,33 @@
 	.ds-footer {
 		margin-top: 0;
 	}
+	.slidess,.section {
+		height:100%;
+	}
+	#picplayer,.slidess {
+		position: relative;
+	}
+	.section {
+		background-color: #000;
+		background-size: cover;
+		background-position: 50% 50%;
+		text-align: center;
+		color: white;
+	}
 </style> 
 </head>
 <body>
-	<script data-main="${ctx}/static/model/home/home.js" src="${ctx}/static/js/require.js"></script>
+	<script type="text/javascript" src="/static/css/dist/pageSwitch.min.js"></script>
 	<jsp:include page="/static/common/header.jsp" />
 	<div class="ds-main container" id="homeBox">
 		<div class="row clearfix">
 			<div class="index-left">
-				<div class="entry-box">
-				<c:choose>
-				<c:when test="${empty loginId}">
-				<c:set var="url_1" value="javascript:window.location.href='/login/index'"></c:set>
-				<c:set var="url_2" value="javascript:window.location.href='/login/index'"></c:set>
-				</c:when>
-				<c:otherwise>
-				<c:set var="url_1" value="/vipcenter/index?showPage=0_0"></c:set>
-				<c:set var="url_2" value="/vipcenter/index?showPage=1"></c:set>
-				</c:otherwise>
-				</c:choose>
-					<a href="${url_1}">
+				<div class="entry-box" id="linksId">
+				
+				
+				
+				
+					<%-- <a href="${url_1}">
 						<div class="entry-icon">
 							<i class="iconfont icon-company"></i>
 						</div>
@@ -106,16 +113,16 @@
 							<span class="entry-title">信用信息双公示</span>
 							<span class="entry-intro">行政许可、行政处罚</span>
 						</div>
-					</a>
+					</a> --%>
 				</div>
 				<div id="picplayer" class="slider">
-					<ul class="slides clearfix">
-						<li class="" v-for="item in items">
+					<div class="slides clearfix sections">
+						<%--  <li class="" v-for="item in items">
 							<a v-bind:href="'/broadcast/detail?id='+item.id" target="_blank" class="">
 								<img v-bind:alt="item.advTitle" v-bind:src="'${upload_url}/doc/download/'+item.fileIds"/>
 							</a>
-						</li>
-					</ul>
+						</li>  --%>
+					</div>
 				</div>
 			</div>
 			<div class="index-right">
@@ -262,4 +269,70 @@
 
 	<jsp:include page="${ctx}/static/common/footer.jsp" />
 </body>
+<script type="text/javascript">
+ $(function(){ 
+		init();
+		//cache();
+		$("#picplayer").PageSwitch({
+			direction:'horizontal',
+			easing:'ease-in',
+			duration:1000,
+			autoPlay:true,
+			loop:'false'
+		});
+	cache()
+});
+ //查询轮播图信息
+function init(){
+	$.ajax({
+		url:"/broadcast/queryAll",
+		type:"POST",
+		data:{
+			pageNo:1,
+			pageSize:10
+		},
+		success:function(data){
+			if(data.code==0){
+				if(data.list!==null){
+					var size = data.list.length;
+					var temp="" ;
+					for(var i =0; i<size;i++){
+						console.log(data.list[i].advTitle)							
+						temp+="<div class='section'><a href><img"
+						temp+=" alt='"+data.list[i].advTitle+"'";
+						temp+=" src='http://docapplive.gdyyjg.cn/doc/download/"+data.list[i].fileIds+"'";
+						temp+="></img></a></div>"; 
+					}
+					console.log("html",temp);
+					$(".slides").html(temp);
+					$(".horizontal").html("<li></li><li></li><li></li>");
+				}			
+			}
+		}
+	})	
+}
+//获取缓存信息
+function cache(){
+	var links=[];
+	var env = localStorage.getItem("EVN_RUL_DATA");
+	var obj = JSON.parse(JSON.stringify(localStorage.getItem("EVN_RUL_DATA")));
+	links=$.parseJSON(obj);
+	console.log(obj);
+	var temp="";
+	$.each(links,function(index,ele){
+		if(typeof ele.aName!="undefined"){
+			temp+="<a href='"+ele.aName+"' class='no-border' target='_blank'>";
+			temp+="<div class='entry-icon'><i class='iconfont icon-company'></i></div>";
+			temp+="<div class='entry-title-wrap'><span class='entry-title'>"+ele.name+"</span></div></a>";
+		}else{
+			temp+="<a href='"+ele.columnCode+"'>";
+			temp+="<div class='entry-icon'><i class='iconfont icon-company'></i></div>";
+			temp+="<div class='entry-title-wrap'><span class='entry-title'>"+ele.name+"</span></div>";
+		}
+		
+	});
+	$("#linksId").html(temp);
+}
+ 
+</script>
 </html>
