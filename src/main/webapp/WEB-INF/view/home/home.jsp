@@ -190,7 +190,7 @@
 			duration:1000,
 			autoPlay:true,
 			loop:'false'
-		}); 
+		});
 	cache()
 });
  //查询轮播图信息
