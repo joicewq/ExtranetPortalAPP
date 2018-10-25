@@ -127,6 +127,7 @@ require(["jquery","tab"],function($,flexslider){
 
 
 		function queryContent(columnId, dataKey) { //查询栏目新闻方法
+			alert("recentModule");
 			var params = {};
 			params.columnId = columnId;
 			params.pageNo = "1";
@@ -146,7 +147,7 @@ require(["jquery","tab"],function($,flexslider){
 						dataArray.push(tempJSON);
 					}
 //					columnOne = dataArray;
-					console.info("columnOne:",columnOne);
+					console.info("recentModule:",recentModule);
 				} else {
 					console.info("初始化数据失败：" + tempData.msg);
 				}					  
