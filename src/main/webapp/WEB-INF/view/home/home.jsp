@@ -60,63 +60,6 @@
 			<div class="index-left">
 				<div class="entry-box" id="linksId">
 				
-				
-				
-				
-					<%-- <a href="${url_1}">
-						<div class="entry-icon">
-							<i class="iconfont icon-company"></i>
-						</div>
-						<div class="entry-title-wrap">
-							<span class="entry-title">企业信息告知</span>
-							<span class="entry-intro">企业管理备案</span>
-						</div>
-					</a>
-					<a href="${url_2}">
-						<div class="entry-icon">
-							<i class="iconfont icon-szzw-danganguanli"></i>
-						</div>
-						<div class="entry-title-wrap">
-							<span class="entry-title">产品信息告知</span>
-							<span class="entry-intro">产品资质备案</span>
-						</div>
-					</a>
-					<a href="/trace/search">
-						<div class="entry-icon">
-							<i class="iconfont icon-search"></i></i>
-						</div>
-						<div class="entry-title-wrap">
-							<span class="entry-title">防伪追溯</span>
-							<span class="entry-intro">一键查伪追溯</span>
-						</div>
-					</a>
-					<a href="${trade_url}" target="_blank">
-						<div class="entry-icon">
-							<i class="iconfont icon-yytb-sheliangqiyexinxisvg"></i>
-						</div>
-						<div class="entry-title-wrap">
-							<span class="entry-title">交易平台</span>
-							<span class="entry-intro">食盐网上交易平台</span>
-						</div>
-					</a>
-					<a href="/complaints/report" class="">
-						<div class="entry-icon">
-							<i class="iconfont icon-shuzizhengwujuchangxinxiang01"></i>
-						</div>
-						<div class="entry-title-wrap">
-							<span class="entry-title">举报投诉</span>
-							<span class="entry-intro">您的投诉，我的服务</span>
-						</div>
-					</a>
-					<a href="http://ywj.gdsalt.com/xingzheng.php" class="no-border" target="_blank">
-						<div class="entry-icon">
-							<i class="iconfont icon-yytb-sheliangqiyexinxisvg"></i>
-						</div>
-						<div class="entry-title-wrap">
-							<span class="entry-title">信用信息双公示</span>
-							<span class="entry-intro">行政许可、行政处罚</span>
-						</div>
-					</a> --%>
 				</div>
 				<div id="picplayer" class="slider">
 					<div class="slides clearfix sections">
