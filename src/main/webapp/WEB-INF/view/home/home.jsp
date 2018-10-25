@@ -317,7 +317,6 @@ function cache(){
 	var env = localStorage.getItem("EVN_RUL_DATA");
 	var obj = JSON.parse(JSON.stringify(localStorage.getItem("EVN_RUL_DATA")));
 	links=$.parseJSON(obj);
-	console.log(obj);
 	var temp="";
 	$.each(links,function(index,ele){
 		if(typeof ele.aName!="undefined"){
