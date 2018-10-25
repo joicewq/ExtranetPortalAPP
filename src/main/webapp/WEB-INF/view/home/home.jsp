@@ -187,7 +187,7 @@
  $(function(){ 
 		init();
 		//cache();
-		$("#picplayer").PageSwitch({
+	 	$("#picplayer").PageSwitch({
 			direction:'horizontal',
 			easing:'ease-in',
 			duration:1000,
@@ -227,6 +227,7 @@ function init(){
 }
 //获取缓存信息
 function cache(){
+	
 	var links=[];
 	var env = localStorage.getItem("EVN_RUL_DATA");
 	var obj = JSON.parse(JSON.stringify(localStorage.getItem("EVN_RUL_DATA")));

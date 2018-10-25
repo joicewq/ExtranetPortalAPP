@@ -20,7 +20,7 @@ $(document).ready(function(){
              templeteInfo = data.message[0];
          }
          stationId=templeteInfo.stationId;     
-       initLogoInfo();//加载站群对应的Logo信息存放localStorage 
+         initLogoInfo();//加载站群对应的Logo信息存放localStorage 
 	});	 
 function initLogoInfo(){
 	$.post("/portal/queryLogoInfo",{
@@ -28,7 +28,7 @@ function initLogoInfo(){
 		stationId:stationId,
 	},
 	function(data,status){	
-		var reslutData=data.data;		
+	 var reslutData=data.data;		
 	 $("#remarkTwo").html("单位地址："+reslutData.remarkTwo);
 	 $("#remarkThr").html("邮政编码："+reslutData.remarkThr);
 	 $("#remarkFour").html("技术支持："+reslutData.remarkFour);
