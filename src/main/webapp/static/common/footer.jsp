@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script src="/static/js/jquery-1.8.3.min.js"></script>
+<!-- <script src="/static/js/jquery-1.8.3.min.js"></script> -->
 <script>
 $(document).ready(function(){
 	var stationId=0;
@@ -13,7 +13,7 @@ $(document).ready(function(){
 		testLink: window.location.origin
 	},
 	function(data,status){	
-		let templeteInfo;
+		var templeteInfo=[];
          if (data.message === '[]' || data.message === undefined) {
              templeteInfo = []
          } else {
@@ -28,7 +28,7 @@ function initLogoInfo(){
 		stationId:stationId,
 	},
 	function(data,status){	
-		let reslutData=data.data;		
+		var reslutData=data.data;		
 	 $("#remarkTwo").html("单位地址："+reslutData.remarkTwo);
 	 $("#remarkThr").html("邮政编码："+reslutData.remarkThr);
 	 $("#remarkFour").html("技术支持："+reslutData.remarkFour);
@@ -41,9 +41,9 @@ function initLogoInfo(){
 			stationId:stationId,
 		},
 		function(data,status){	
-		 let links=data.data;
-		 let lis="";		 		
-		 links.forEach((item,index,arr)=>{       	
+		 var links=data.data;
+		 var lis="";		 		
+		 $.each(links,function(index,item){       	
 		     lis+="<li><a href="+item.url+" target='_blank'>"+item.name+"</a></li>";   	     	    	
 			}); 		
 		 $(".footer-links").html(lis);        
