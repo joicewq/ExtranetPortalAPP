@@ -167,6 +167,9 @@
                 </div>
 			</div>
 		</div>
+		
+		<div id="newsLatest" class="row clearfix">			 
+		</div>
 
 		<div id="columnOne" class="row clearfix">			 
 		</div>
