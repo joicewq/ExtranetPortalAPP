@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>广东省盐业监管服务平台</title>
 <link rel="Shortcut Icon" href="/static/images/jgqt.ico">
+
 <!-- 未读消息图标css -->
 <style>
 	.info-badge{
@@ -49,8 +50,11 @@
 	}
 </style> 
 </head>
-<body>
+
+<body>	
 	<script type="text/javascript" src="/static/css/dist/pageSwitch.min.js"></script>
+	<script src="/static/js/require.js" data-main="/static/model/home/home.js"></script>
+ 
 	<jsp:include page="/static/common/header.jsp" />
 	<div class="ds-main container" id="homeBox">
 		<div class="row clearfix">
@@ -164,106 +168,13 @@
 			</div>
 		</div>
 
-		<div class="row clearfix">
-			<div class="module module-min module-border">
-				<div class="module-title-wrap">
-					<span class="module-title-primary"></span>
-					<div class="module-title inline-block">
-						企业信息公示
-					</div>
-					<a href="/ni/list" class="ds-more pull-right">更多>></a>
-				</div>
-				<div class="module-content-wrap" id="company-publicity">
-					<ul class="news-list">
-						<li v-for="item in items" >
-							<a v-bind:href="'/spi/detail?id='+item.id" target="_blank" v-bind:title="item.issueTitle" class="news-title" v-html="item.issueTitle"></a>
-							<span class="news-hot-icon" v-if="item.isNewest==true"></span>
-							<span class="news-date" v-html="item.date"></span>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="module module-min module-border pull-right">
-				<div class="module-title-wrap">
-					<span class="module-title-primary"></span>
-					<div class="module-title inline-block">
-						通知公告
-					</div>
-					<a href="/notice/list" class="ds-more pull-right">更多>></a>
-				</div>
-				<div class="module-content-wrap" id="notices">
-					<ul class="news-list">
-						<li v-for="item in items" >
-							<a v-bind:href="'/notice/detail?id='+item.id" target="_blank" v-bind:title="item.title" class="news-title" v-html="item.title"></a>
-							<span class="news-hot-icon" v-if="item.isNewest==true"></span>
-							<span class="news-date" v-html="item.date"></span>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<div id="columnOne" class="row clearfix">			 
 		</div>
+		<div id="columnThr" class="row clearfix">
+		</div>
+				
+		 
 		
-		<div id="picplayer2" style="position:relative;overflow:hidden;width:1200px;height:92px;clear:none;border:solid 1px #ccc;margin:0 auto;margin-top: 30px" >
-			<img src="/static/images/banner3.jpg" alt="" />
-		</div>
-		
-		<div class="row modules-banner">
-			<img src="${ctx}/static/images/indexModulesBannerLeft.png" class="modules-banner-left">
-			<div class="modules-banner-line"></div>
-			<img src="${ctx}/static/images/indexModulesBannerRight.png" class="modules-banner-right">
-		</div>
-		<div class="row clearfix" id="publicity-list">
-			<div class="module module-normal">
-				<div class="module-title-wrap">
-					<span class="module-title-primary"></span>
-					<div class="module-title inline-block">
-						产品信息公示
-					</div>
-					<a href="/ni/list" class="ds-more pull-right">更多>></a>
-				</div>
-				<div class="module-content-wrap" id="publicity-pass-list">
-					<ul class="news-list">
-						<li v-for="item in items" >
-							<a v-bind:href="'/ni/naturaldetail?id='+item.id" target="_blank" v-bind:title="item.issueTitle" class="news-title" v-html="item.issueTitle"></a>
-							<span class="news-hot-icon" v-if="item.isNewest==true"></span>
-							<span class="news-date" v-html="item.date"></span>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="module-divider"></div>
-			<div class="module module-normal pull-right">
-				<div class="module-title-wrap">
-					<span class="module-title-danger"></span>
-					<div class="module-title inline-block">
-						检测结果公示
-					</div>
-					<a href="/ni/list" class="ds-more pull-right">更多>></a>
-				</div>
-				<div class="module-content-wrap" id="publicity-failed-list">
-					<ul class="news-list">
-						<li v-for="item in items" >
-							<a v-bind:href="'/ni/detail?id='+item.id" target="_blank" v-bind:title="item.title" class="news-title" v-html="item.title"></a>
-							<span class="news-hot-icon" v-if="item.isNewest"></span>
-							<span class="news-date" v-html="item.date"></span>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="row related-links">
-			<div class="related-links-left">
-				<span class="related-links-icon"><i class="fa fa-link"></i></span>
-				<span class="related-links-text">相关链接<br /><small>RELATED LINKS</small></span>
-			</div>
-			<div class="related-links-right">
-				<a href="http://www.gov.cn" target="_blank"><img src="/static/images/bottom-zhengfuwang.jpg" /></a>
-				<a href="http://www.sdpc.gov.cn" target="_blank"><img src="/static/images/bottom-fagaiwei.jpg" /></a>
-				<a href="http://www.miit.gov.cn" target="_blank"><img src="/static/images/bottom-gongxinbu.jpg" /></a>
-				<a href="http://www.gd.gov.cn" target="_blank"><img src="/static/images/bottom-renminzhengfu.jpg" /></a>
-				<a href="http://www.cnsalt.cn" target="_blank"><img src="/static/images/bottom-chinayanye.jpg" /></a>
-			</div>
-		</div>
 		
 	</div>
 
@@ -273,13 +184,13 @@
  $(function(){ 
 		init();
 		//cache();
-		$("#picplayer").PageSwitch({
+	 	$("#picplayer").PageSwitch({
 			direction:'horizontal',
 			easing:'ease-in',
 			duration:1000,
 			autoPlay:true,
 			loop:'false'
-		});
+		}); 
 	cache()
 });
  //查询轮播图信息
@@ -313,11 +224,13 @@ function init(){
 }
 //获取缓存信息
 function cache(){
+	
 	var links=[];
 	var env = localStorage.getItem("EVN_RUL_DATA");
 	var obj = JSON.parse(JSON.stringify(localStorage.getItem("EVN_RUL_DATA")));
 	links=$.parseJSON(obj);
 	var temp="";
+	console.log("data",links)
 	$.each(links,function(index,ele){
 		if(typeof ele.aName!="undefined"){
 			temp+="<a href='"+ele.aName+"' class='no-border' target='_blank'>";
