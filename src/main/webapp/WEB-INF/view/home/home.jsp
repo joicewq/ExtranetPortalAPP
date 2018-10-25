@@ -52,7 +52,6 @@
 </head>
 
 <body>	
-	<script type="text/javascript" src="/static/css/dist/pageSwitch.min.js"></script>
 	<script src="/static/js/require.js" data-main="/static/model/home/home.js"></script>
  
 	<jsp:include page="/static/common/header.jsp" />
@@ -186,7 +185,6 @@
 <script type="text/javascript">
  $(function(){ 
 		init();
-		//cache();
 	 	$("#picplayer").PageSwitch({
 			direction:'horizontal',
 			easing:'ease-in',
@@ -194,7 +192,7 @@
 			autoPlay:true,
 			loop:'false'
 		});
-	cache()
+		cache()
 });
  //查询轮播图信息
 function init(){
@@ -227,26 +225,25 @@ function init(){
 }
 //获取缓存信息
 function cache(){
-	
-	var links=[];
-	var env = localStorage.getItem("EVN_RUL_DATA");
-	var obj = JSON.parse(JSON.stringify(localStorage.getItem("EVN_RUL_DATA")));
-	links=$.parseJSON(obj);
-	var temp="";
-	console.log("data",links)
-	$.each(links,function(index,ele){
-		if(typeof ele.aName!="undefined"){
-			temp+="<a href='"+ele.aName+"' class='no-border' target='_blank'>";
-			temp+="<div class='entry-icon'><i class='iconfont icon-company'></i></div>";
-			temp+="<div class='entry-title-wrap'><span class='entry-title'>"+ele.name+"</span></div></a>";
-		}else{
-			temp+="<a href='"+ele.columnCode+"'>";
-			temp+="<div class='entry-icon'><i class='iconfont icon-company'></i></div>";
-			temp+="<div class='entry-title-wrap'><span class='entry-title'>"+ele.name+"</span></div>";
+	$.post("/portal/getEnv",{},
+	function(data,status){	
+		if(data!=null){
+			var temp="";
+			$.each($.parseJSON(data.onlineService),function(index,ele){
+				if(typeof ele.aName!="undefined"){
+					temp+="<a href='"+ele.aName+"' class='no-border' target='_blank'>";
+					temp+="<div class='entry-icon'><i class='iconfont icon-company'></i></div>";
+					temp+="<div class='entry-title-wrap'><span class='entry-title'>"+ele.name+"</span></div></a>";
+				}else{
+					temp+="<a href='"+ele.columnCode+"'>";
+					temp+="<div class='entry-icon'><i class='iconfont icon-company'></i></div>";
+					temp+="<div class='entry-title-wrap'><span class='entry-title'>"+ele.name+"</span></div>";
+				}
+				
+			});
+			$("#linksId").html(temp);
 		}
-		
-	});
-	$("#linksId").html(temp);
+	});	 
 }
  
 </script>
