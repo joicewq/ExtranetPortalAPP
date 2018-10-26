@@ -53,13 +53,15 @@
 	 * tableTemplateId 生成的表放在哪div中(div ID)
 	 * tableTemplateTxtId 表的模版
 	 */
-	function showTemplateTable(pageNo, pageSize, url, pageMsgTemplateId,
+	function showTemplateTable(columnId,pageNo, pageSize, url, pageMsgTemplateId,
 		tableTemplateId, tableTemplateTxtId, queryParams,callback) {
+
 		animation.load({
 			container:$("#" + tableTemplateId)
 		});
 		//请求参数，包括表单参数与分页参数
 		var pageParam = {
+			"columnId":columnId,
 			"pageNo": pageNo,
 			"pageSize": pageSize
 		};
@@ -70,6 +72,7 @@
 			data: queryParams,
 			dataType: "json",
 			success: function(page) {
+				
 				//支持多个分页div
 				var pageDiv = pageMsgTemplateId.split(",");
 				animation.destory({
@@ -82,9 +85,18 @@
 					function(i) {
 						$("#pageMsgTemplate").clone().appendTo($("body"));
 						page=typeof page == "object" ? page : JSON.parse(page);
-						page.curPage=parseInt(page.curPage);
+						 
+						var totalPage=page.totalCount/pageSize;
+						if(page.totalCount%pageSize>0)
+							totalPage++;
+						page.curPage=parseInt(page.currentPage);
 						page.pageLine=parseInt(page.pageLine);
-						page.totalPage=parseInt(page.totalPage);
+						page.totalPage=parseInt(totalPage);
+						page.totalRow=parseInt(page.totalCount);
+						for(var i=0;i<page.data.length;i++){
+							 page.data[i].publishDate= page.data[i].createTime;								 
+						}
+//						 console.info("page",page);
 						$('#' + this).setTemplateElement(
 							"pageMsgTemplate");
 						$('#' + this).processTemplate(page);
@@ -152,6 +164,7 @@
 				}
 			});
 	}
+
 	
 	function pagerGlobal(pager){
 		/*window.pager={

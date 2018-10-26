@@ -4,13 +4,14 @@
 	<script>
 		function pageSetting (num,obj){
 		if(obj){
+			
 			if( isNaN($('#pageNum').val()) || parseInt($('#pageNum').val()) < 1){
 				$('#pageNum').val(1);
 			}
 			if( parseInt($('#pageNum').val()) > parseInt(num)){
 				$('#pageNum').val(num);
 				parseInt(num) == 0 && $('#pageNum').val(" ");
-			}
+			}			
 		}
 	}
 	</script>

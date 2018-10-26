@@ -71,55 +71,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="index-right">
-                <a href="/news/list" class="ds-more pull-right" style="margin-top: 10px;margin-right: 10px;">更多>></a>
-				<ul class="tabs clearfix">
-                    <li class="active"><a href="#dynamic-list">盐业动态</a></li>
-                    <li><a href="#law-enforcement">盐政执法</a></li>
-                    <li><a href="#policies">政策法规</a></li>
-                </ul>
-                <div class="tab-contentmian">
-                    <div class="tab-content nopadding" id="dynamic-list">
-                        <ul class="news-list">
-                        	<li v-for="item in items">
-                        		<a v-bind:href="'/news/detail?id='+item.id" target="_blank" v-bind:title="item.title" class="news-title" v-html="item.title"></a>
-                        		<span class="news-hot-icon" v-if="item.isNewest==true"></span>
-								<span class="news-date" v-html="item.date"></span>                       		
-                        	</li>
-                        </ul>
-                    </div>
-                    <div class="tab-content nopadding" id="law-enforcement">
-                    	<ul class="news-list">
-                        	<li v-for="item in items">
-                        		<a v-bind:href="'/news/detail?id='+item.id" target="_blank" v-bind:title="item.title" class="news-title" v-html="item.title"></a>
-                        		<span class="news-hot-icon" v-if="item.isNewest==true"></span>
-								<span class="news-date" v-html="item.date"></span>                       		
-                        	</li>
-                        </ul>
-                    </div>
-                    <div class="tab-content nopadding" id="policies">
-                    	<ul class="news-list">
-                        	<li v-for="item in items">
-                        		<a v-bind:href="'/policies/detail?id='+item.id" target="_blank" v-bind:title="item.title" class="news-title" v-html="item.title"></a>
-                        		<span class="news-hot-icon" v-if="item.isNewest==true"></span>
-								<span class="news-date" v-html="item.date"></span>                       		
-                        	</li>
-                        </ul>
-                    </div>
-                </div>
-			</div>
 		</div>
 		
 		<div id="newsLatest" class="row clearfix">			 
 		</div>
-
+		<div id="columnTwo" class="row clearfix">			 
+		</div>
 		<div id="columnOne" class="row clearfix">			 
 		</div>
 		<div id="columnThr" class="row clearfix">
 		</div>
-				
-		 
-		
 		
 	</div>
 

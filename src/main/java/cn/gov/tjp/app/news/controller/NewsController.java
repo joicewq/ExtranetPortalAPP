@@ -39,12 +39,12 @@ public class NewsController {
 	public String showDetailPro(HttpServletRequest request, Model model){
 		String id = request.getParameter("id");
 
-		JSONObject json = new JSONObject();
+		/*JSONObject json = new JSONObject();
 		try {
 			String resultStr = HttpUtil.get(article_url +"/query/" + id,"");
 			JSONObject objResult = JSON.parseObject(resultStr);
-			/*List<JSONObject> arrayResult = JSON.toJavaObject(JSON.parseArray(String.valueOf(json.get("data"))),List.class);
-			model.addAllAttributes(resultMap);*/
+			List<JSONObject> arrayResult = JSON.toJavaObject(JSON.parseArray(String.valueOf(json.get("data"))),List.class);
+			model.addAllAttributes(resultMap);
 			Object obj = objResult.get("data");
 			Map resultMap = JSON.parseObject(obj.toString(), Map.class);
 			model.addAttribute("News", resultMap);
@@ -54,7 +54,7 @@ public class NewsController {
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-		}
+		}*/
 		return "/news/detail";
 		
 	}

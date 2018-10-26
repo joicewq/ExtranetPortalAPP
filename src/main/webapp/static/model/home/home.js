@@ -1,14 +1,13 @@
 require.config(config);
 require(["jquery","tab"],function($,flexslider){
 	var picPath="../images/";
-	const self=this;
 	var tempInfo=null;
 	var stationId=0;
 
 	var columnOne=[];
 	var columnTwo=[];
 	var columnThr=[];
-	var columnHash= {}; //后台中code-id的对照表
+	var columnHash=null; //后台中code-id的对照表
 	var links= [{
 		icon: "iconfont icon-jianchaguandayi",
 		name: "最高人民检察院",
@@ -109,52 +108,9 @@ require(["jquery","tab"],function($,flexslider){
 
 
 	$(document).ready(function(){	
-
 		getTempInfo(false); 
-	 
-		//从后台获取栏目hash表
-		if(columnHash==null) {				
-			$.post("/portal/getColumnHash",{},
-					function(data,status){	
-				columnHash=data;
-				initQuery();
-			}); 			
-		} 
-
-		function initQuery() { //初始化查询方法
-			queryContent(null, "recentModule");
-		}
-
-
-		function queryContent(columnId, dataKey) { //查询栏目新闻方法
-			alert("recentModule");
-			var params = {};
-			params.columnId = columnId;
-			params.pageNo = "1";
-			params.pageSize = "5";		 
-			params.stationId=stationId;				
-			$.post("/portal/columnNewsPage",params,
-					function(data,status){	
-				var tempData = data;
-				if(tempData!=null && tempData.code == "1") {
-					var data = tempData.data;
-					var dataArray = [];
-					for(var i = 0; i < data.length; i++) {
-						var tempJSON = {};
-						tempJSON.id = data[i].id;
-						tempJSON.title = data[i].title;
-						tempJSON.date = formatDate_date(data[i].updateTime);
-						dataArray.push(tempJSON);
-					}
-//					columnOne = dataArray;
-					console.info("recentModule:",recentModule);
-				} else {
-					console.info("初始化数据失败：" + tempData.msg);
-				}					  
-			}); 
-			
-		}
-		
+		getColumnHash();		
+	
 		console.info("initColumn start");
 //		alert("initColumn");
 		if(isEmpty(tempInfo))
@@ -162,25 +118,109 @@ require(["jquery","tab"],function($,flexslider){
 		else
 		   initColumn();
 		console.info("initColumn end");
-
-		/* function initColumnHash() { //初始化栏目对照表方法
-				var _time = 0;
-				var _interval = setInterval(function() {
-					if(!isEmpty(columnHash)) {
-						columnHash = JSON.parse( columnHash );
-						//self.initQuery();
-						clearInterval(_interval);
-					}
-					if(_time > 50) {
-						clearInterval(_interval);
-						console.error("columnHash初始化失败");
-					}
-					_time++;
-				}, 100);
-			},*/
-
-
+		
+		initQuery();
 	});
+	
+	//从后台获取栏目hash表 added by WeiGS 2018-03-22
+	 function getColumnHash() {		
+//		 alert((columnHash));
+		 console.info("columnHash:",columnHash);
+		if(isEmpty(columnHash)) {
+			$.post("/portal/getColumnHash",{},
+			function(data,status){	
+				var dataTemp = data;
+				if(!isEmpty(dataTemp)) {					
+					columnHash = dataTemp;
+					initQuery();
+				}  				  
+			}) 				 
+		}else{
+//			initColumnHash();
+		}
+	}
+	
+	/*function initColumnHash() { //初始化栏目对照表方法
+		var _time = 0;
+		var _interval = setInterval(function() {
+			if(!isEmpty(columnHash)) {
+				columnHash = JSON.parse( columnHash );
+				//self.initQuery();
+				clearInterval(_interval);
+			}
+			if(_time > 50) {
+				clearInterval(_interval);
+				console.error("columnHash初始化失败");
+			}
+			_time++;
+		}, 100);
+    }*/
+	
+	function initQuery() { //初始化查询方法
+		queryContent(null, "recentModule");
+	}	
+	
+	function queryContent(columnId, dataKey) { //查询栏目新闻方法
+		var params = {};
+		params.columnId = columnId;
+		params.pageNo = "1";
+		params.pageSize = "5";		 
+		params.stationId=stationId;				
+		$.post("/portal/columnNewsPage",params,
+				function(data,status){	
+			var tempData = data;
+			if(tempData!=null && tempData.code == "1") {
+				var data = tempData.data;
+				var dataArray = [];
+				for(var i = 0; i < data.length; i++) {
+					var tempJSON = {};
+					tempJSON.id = data[i].id;
+					tempJSON.title = data[i].title;
+					tempJSON.date = formatDate_date(data[i].updateTime);
+					dataArray.push(tempJSON);
+				}
+				recentModule = dataArray;
+				console.info("recentModule:",recentModule);
+				initNewLatest();
+				
+			} else {
+				console.info("初始化数据失败：" + tempData.msg);
+			}					  
+		}); 
+		
+	}
+	
+	function initNewLatest(){
+		console.info("initNewLatest");
+            var newsLatest="";		
+			var style="<div class='module module-min module-border'>"+
+				"<div class='module-title-wrap'>"+
+					"<span class='module-title-primary'></span>"+
+					"<div class='module-title inline-block'>"+
+					    "最新更新"+
+					"</div>"+						 
+				"</div>";
+			var newsContone="<div class='module-content-wrap' id='company-publicity'>"+
+					"<ul class='news-list'>";
+		 
+		      $.each(recentModule,function(index,itemList){ 			 
+                 var li="";
+                 li+="<li>" +
+                 "<a  href='/news/detail?id="+itemList.id+"' target='_blank' class='news-title' >"+itemList.title+"</a>"+
+					    "<span class='news-hot-icon'></span>"+
+					    "<span class='news-date' >"+itemList.date+"</span>"+
+					 "</li>";
+                 newsContone+=li;
+			});	
+			newsContone+="</ul>"+				        
+			         "</div>"+
+			        "</div>";
+			style+=newsContone;
+			newsLatest+=style; 	   			 
+			 
+			$("#newsLatest").html(newsLatest);
+	}
+	
 	function getTempInfo(isInit){
 	//请求模板	 
 	$.post("/portal/queryTemplete",{
@@ -228,40 +268,45 @@ require(["jquery","tab"],function($,flexslider){
 				var length = dataTemp.length;
 				console.info("dataTemp:",dataTemp);
 				if(dataTemp.length>0){
-					dataTemp.forEach(function(element,len) {						 
+//					$.each(dataTemp,function(element,len) {
+					/*for(var i=0;i<dataTemp.length;i++){
+						var len=i;
+						var element=dataTemp[i];*/
+					$.each(dataTemp,function(len,element){  
+//					dataTemp.forEach(function(element,len) {						 
 						//取出visualizationColumn==2的值 信息公开
-						// var theme=["","green","yellow","purple","red","blue","orange"]
-						/*if(element.visualizationColumn==="2"){
+						 var theme=["","green","yellow","purple","red","blue","orange"]
+						if(element.visualizationColumn==="2"){
 							switch (element.name){
 							case "院级领导" :
-								self.$set(element,"icon","iconfont1 icon-leader");
-								self.$set(element,"theme",'green');
+								element.icon="iconfont1 icon-leader";
+								element.theme="green";
 								break;
 							case "机构设置":
-								self.$set(element,"icon","iconfont1 icon-mechanism");
-								self.$set(element,"theme",'yellow');
+								element.icon="iconfont1 icon-mechanism";
+								element.theme="yellow";
 								break;
 							case "政策文件":
-								self.$set(element,"icon","iconfont1 icon-gov");
-								self.$set(element,"theme",'purple');
+								element.icon="iconfont1 icon-gov";
+								element.theme="purple";
 								break;
 							case "法律文书":
-								self.$set(element,"icon","iconfont1 icon-law");
-								self.$set(element,"theme",'red');
+								element.icon="iconfont1 icon-law";
+								element.theme="red";
 								break;
 							case "工作文件":
-								self.$set(element,"icon","iconfont1 icon-files");
-								self.$set(element,"theme",'blue');
+								element.icon="iconfont1 icon-files";
+								element.theme="blue";
 								break;
 							case "工作简报":
-								self.$set(element,"icon","iconfont1 icon-report");
-								self.$set(element,"theme",'orange');
+								element.icon="iconfont1 icon-report";
+								element.theme="orange";
 								break;
 							default:
 							}
 							columnTwo.push(element);
-							console.log("columnTwo",self.columnTwo);
-						}*/
+							console.log("columnTwo",columnTwo);
+						}
 											
 											
 						$.post("/portal/columnNewsPage",{
@@ -301,8 +346,8 @@ require(["jquery","tab"],function($,flexslider){
 //								console.info("initPageDate end");								
 							}  
 						});	
-
-					}, this);
+//					}
+					});
 					
 				}   
 			});			
@@ -310,28 +355,26 @@ require(["jquery","tab"],function($,flexslider){
 		}
 		
 	}
+	//将数据填充到页面
 	function initPageDate(){
-//		console.info("initPageDate");		
-		var columnOneData="",columnThrData="";
+		var columnOneData="",columnTwoData="",columnThrData="";
 		
 	    $.each(columnOne,function(index,item){ 
-//		columnOne.forEach((item,index,arr)=>{ 
 			var style="<div class='module module-min module-border'>"+
 				"<div class='module-title-wrap'>"+
 					"<span class='module-title-primary'></span>"+
 					"<div class='module-title inline-block'>"+
 					     item.name+
 					"</div>"+	
-					"<a href='/ni/list' class='ds-more pull-right'>更多>></a>"+
+					"<a href='/news/list?id="+item.id+"' class='ds-more pull-right'>更多>></a>"+
 				"</div>";
 			var newsContone="<div class='module-content-wrap' id='company-publicity'>"+
 					"<ul class='news-list'>";
 			if(!isEmpty(item.list))
 		      $.each(item.list,function(index,itemList){ 
-//			 item.list.forEach((itemList,index,arr)=>{ 				 
                  var li="";
                  li+="<li>" +
-                 		"<a v-bind:href='#' target='_blank' class='news-title' >"+itemList.title+"</a>"+
+                 		"<a  href='/news/detail?id="+itemList.id+"' target='_blank' class='news-title' >"+itemList.title+"</a>"+
 					    "<span class='news-hot-icon'></span>"+
 					    "<span class='news-date' >"+itemList.date+"</span>"+
 					 "</li>";
@@ -345,15 +388,13 @@ require(["jquery","tab"],function($,flexslider){
 			});		
 		
 	    $.each(columnThr,function(index,item){ 
-//	    	console.info("columnThr item:",item);
-//		columnThr.forEach((item,index,arr)=>{ 
 			var style="<div class='module module-min module-border'>"+
 				"<div class='module-title-wrap'>"+
 					"<span class='module-title-primary'></span>"+
 					"<div class='module-title inline-block'>"+
 					     item.name+
 					"</div>"+	
-					"<a href='/ni/list' class='ds-more pull-right'>更多>></a>"+
+					"<a href='/news/list?id="+item.id+"' class='ds-more pull-right'>更多>></a>"+
 				"</div>";
 			var newsContone="<div class='module-content-wrap' id='company-publicity'>"+
 					"<ul class='news-list'>";
@@ -361,7 +402,7 @@ require(["jquery","tab"],function($,flexslider){
 			 $.each(item.list,function(index,itemList){  			 		 
                  var li="";
                  li+="<li>" +
-                 		"<a v-bind:href='#' target='_blank' class='news-title' >"+itemList.title+"</a>"+
+                        "<a  href='/news/detail?id="+itemList.id+"' target='_blank' class='news-title' >"+itemList.title+"</a>"+
 					    "<span class='news-hot-icon'></span>"+
 					    "<span class='news-date' >"+itemList.date+"</span>"+
 					 "</li>";
@@ -373,7 +414,37 @@ require(["jquery","tab"],function($,flexslider){
 			style+=newsContone;
 			columnThrData+=style; 	   			 
 			});	
+	    
+	    if(!isEmpty(columnTwo)){
+	    	var style="<div class='module module-min module-border'>"+
+			"<div class='module-title-wrap'>"+
+				"<span class='module-title-primary'></span>"+
+				"<div class='module-title inline-block'>"+
+				    "信息公开"+
+				"</div>"+	
+			"</div>";
+	    	var newsContone="<div class='module-content-wrap' id='company-publicity'>"+
+				"<ul class='news-list'>";
+	         $.each(columnTwo,function(index,item){ 		
+                 var li="";
+                 li+="<li>" +
+                 		"<a  href='/news/list' target='_blank' class='news-title' >" +
+                 		  "<img  src='/static/images/footer-icon.png' class='"
+                 		   +item.icon+" "+item.theme+"'>"+
+                 		"</a>"+
+                 		 item.name+					   		   
+					 "</li>";
+                 newsContone+=li;		 
+			});	
+	         newsContone+="</ul>"+				        
+	         "</div>"+
+	        "</div>";
+	       style+=newsContone;
+	       columnTwoData+=style; 	  
+	    }
+	    
 		$("#columnOne").html(columnOneData);	
+		$("#columnTwo").html(columnTwoData);
 		$("#columnThr").html(columnThrData);	
 	}
 

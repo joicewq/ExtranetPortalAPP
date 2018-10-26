@@ -15,23 +15,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-	<script src="../static/js/require.js" data-main="${ctx}/static/model/article/detail.js"></script>
+	<script src="../static/js/require.js" data-main="${ctx}/static/model/news/newsDetail.js"></script>
 	<jsp:include page="${ctx}/static/common/header.jsp" />
 	<div class="ds-main">
+
 			<div class="content">
 				<div class="article-wrap">
+					<!-- <div>返回</div> -->
 					<div class="article-header">
-						<h2 class="article-title">${News.title}</h2>
+						<h2 class="article-title"></h2>
 						<div class="article-info">
 							<div class="inline-block">发布时间：<span id="filterPublishTime"></span></div>
-							<input type="hidden" value="${News.publishDate}" id="publishTime" />
+							<br/>
+							<!-- <div class="inline-block">来源：<span id="contentFrom"></span></div> -->
+							<%-- <input type="hidden" value="${News.publishDate}" id="publishTime" /> --%>
 							<%-- <div class="inline-block ml40">浏览人数：<span>${PoliciesInfo.title}</span></div> --%>
 						</div>
 					</div>
-					<div class="article-content article-module">
-						<div class="font-special">
-							${News.content}
-						</div>
+					<div id="contentData" class="article-content article-module">					  
 					</div>
 					<c:if test="${News.uploadIds != ''}">
 						<div class="article-accessory article-module">

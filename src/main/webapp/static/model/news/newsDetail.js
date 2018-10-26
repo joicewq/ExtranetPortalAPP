@@ -1,5 +1,147 @@
 require.config(config);
 require(["jquery", "animation" ], function($,animation) {
+	var newsInfo={ //新闻信息	
+	    };
+	var docUrl=""; //文档服务地址
+	var iframeSrc=""; //pdf文档显示地址
+	var pdfUrl = "/pdf/web/viewer.html";
+	
+	/**
+	 * 判断一个对象是否为空，其中字段串""也算是空
+	 */
+	function isEmpty(object) {
+		var flag = false;
+
+		switch(typeof(object)) {
+		case("undefined"):
+		{
+			flag = true;
+			break;
+		}
+		case("number"):
+		{
+			break;
+		}
+		case("string"):
+		{
+			if(object == "") {
+				flag = true;
+			}
+			break;
+		}
+		case("boolean"):
+		{
+			break;
+		}
+		case("object"):
+		{
+			if(object == null) {
+				flag = true;
+			}
+			break;
+		}
+		case("function"):
+		{
+			break;
+		}
+		default:
+		{
+			flag = true;
+			break;
+		}
+		}
+		return flag;
+	}
+	
+	function getQueryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");       
+       var r = window.location.search.substr(1).match(reg);           
+         if(r!=null){
+         // alert(unescape(r[2]));
+            return  unescape(r[2])
+         }
+        return null;
+     }
+	
+	 function setPDFURL() { //获取PDF请求地址
+		if(!isEmpty(newsInfo.pdfId)) { //当不为空时才配置pdf展示
+			var _url = pdfUrl + "?file=";			
+			_url = _url + "/portal/getPDFByID/" + newsInfo.pdfId;
+			iframeSrc = _url;
+		}
+	}
+	 
+	 function initDocUrl() { //初始化文档服务路径方法
+		 $.post("/portal/getDocUrl",{},function(data,status){				 
+				docUrl = data;
+			});	
+		}
+	 /**
+	  * 格式时间(yyyy-MM-dd)
+	  */
+	 function formatDate_date(stamp) {
+	 	let date = new Date(stamp);
+	 	let year = date.getFullYear();
+	 	let month = date.getMonth() + 1;
+	 	let day = date.getDate();
+	 	return year + "-" + (month > 9 ? month : ("0" + month)) + "-" + (day > 9 ? day : ("0" + day));
+	 }
+	 /**
+	  * 格式时间(yyyy-MM-dd HH-mm-ss)
+	  */
+	 function formatDate_time(stamp) {
+	 	let date = new Date(stamp);
+	 	let hour = date.getHours();
+	 	let minute = date.getMinutes();
+	 	let second = date.getSeconds();
+	 	return formatDate_date(stamp) + " " + (hour > 9 ? hour : ("0" + hour)) + ":" + (minute > 9 ? minute : ("0" + minute)) + ":" + (second > 9 ? second : ("0" + second));
+	 }
+	  function initDate(_date) { //格式时间方法
+		let result = "";
+			//如果传入的参数不为空就格式
+			if(!isEmpty(_date)) {
+				result = formatDate_time(_date);
+			}
+			return result;
+	 }
+	
+	
+	function getData(){
+		var id=getQueryString("id");
+		$.post("/portal/queryDetail",{
+			id:id	
+		},function(data,status){				 
+			var tempData = data;
+			if(!isEmpty(tempData) && tempData.code == "1") {
+				var data = tempData.data[0];
+				    newsInfo=data;
+				/*for(var key in newsInfo) {
+					
+					newsInfo[key] = data[key];
+				}*/
+				setPDFURL();
+				initDocUrl();
+				iniPageDate();
+			} else {
+				self.$message.error("初始化失败：" + tempData.msg);
+			}
+		});	
+		
+	}
+	function iniPageDate(){
+		$(".article-title ").html(newsInfo.title);
+		$("#filterPublishTime ").html(initDate(newsInfo.updateTime));
+//		$("#contentFrom ").html(initDate(newsInfo.updateTime));
+		$("#contentData ").html(newsInfo.content);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	function timeStampToString(time,mode){
 		var date={};
 	    var datetime = new Date(time);
@@ -14,8 +156,12 @@ require(["jquery", "animation" ], function($,animation) {
 	    	return date.year+"-"+date.month+"-"+date.date;
 	    }
 	}
+	
 
 	$(function() {
+//		alert("id:"+getQueryString("id"));
+		getData();
+		$(".content").css("minHeight",$(window).height()-$(".header").height()-$(".ds-footer").height());
 		var id1 = $("#accessory").val();
 		var option = {
 				is_shade: false,
@@ -37,10 +183,10 @@ require(["jquery", "animation" ], function($,animation) {
 						$("#uploadDiv").html(data);
 						var accessoryNum=$("#uploadTbody").find("tr").length;
 						$.each($("#uploadTbody").find("tr"),function(i){
-								var $li = $("<li></li>");
-								var $a = $("<a></a>");
-								$a.text($(this).children("td").eq(0).text()).attr("href","http://test.doc.qhgrain.com/doc/download/"+id1);
-								$li.append($a).appendTo($(".article-accessory-list"));
+							var $li = $("<li></li>");
+							var $a = $("<a></a>");
+							$a.text($(this).children("td").eq(0).text()).attr("href",$("#accessory_url").val()+"/doc/download/"+$(this).children("td").eq(2).children(".hide").attr("id"));
+							$li.append($a).appendTo($(".article-accessory-list"));
 						})
 						animation.destory();
 					});					

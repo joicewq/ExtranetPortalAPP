@@ -29,12 +29,19 @@
 				}
 				h2+=data.title+"</h2>";
 			var ul = h2 + "<ul>";
-			for(var i = 0; i <data.menu.length; i++){
-				ul += "<li><a class='menu-a' href='javascript:void(0)'>"+data.menu[i].name+"</a>" ;
-				if(data.menu[i].childs){
-					ul +="<ul class='menu-list-second'>"
-					for(var j = 0; j <data.menu[i].childs.length; j++){
-						ul += "<li><a class='menu-a' href='javascript:void(0)'>"+data.menu[i].childs[j].name+"</a></li>" 
+			for(var i = 0; i <data.menu.length; i++){				
+				if(data.menu[i].id==data.columnId)
+					ul += "<li><a class='menu-a active' href='javascript:void(0)'>"+data.menu[i].name+"</a>" ;
+				else
+				    ul += "<li><a class='menu-a' href='javascript:void(0)'>"+data.menu[i].name+"</a>" ;
+				if(data.menu[i].children){
+					ul +="<ul id='"+data.menu[i].id +"' class='menu-list-second'>"
+					for(var j = 0; j <data.menu[i].children.length; j++){
+						if(data.menu[i].children[j].id==data.columnId){
+							ul += "<li><a class='menu-a active' href='javascript:void(0)'>"+data.menu[i].children[j].name+"</a>" ;						
+						}
+						else						   
+						    ul += "<li><a class='menu-a' href='javascript:void(0)'>"+data.menu[i].children[j].name+"</a></li>" 
 					}
 					ul += "</ul>";
 				};
@@ -44,7 +51,7 @@
 			// $(ele).append(h2);
 			$(ele).addClass("menu-list left-menu").html(ul);
 			var first_href = data.menu[0].url;
-			$(ele+" .menu-a").first().addClass("active");
+//			$(ele+" .menu-a").first().addClass("active");
 			$.ajax({
 				url: first_href,
 				type: "get",

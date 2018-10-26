@@ -44,8 +44,8 @@
 						<div class="inline-block content-header-date">发布时间</div>
 					</div>
 					<div id="policies-list">
-						<ul id="policies-list-items" class="content-item-list">
-						</ul>
+						 <ul id="policies-list-items" class="content-item-list">
+						</ul> 
 						<div id="pagination">
 							<jsp:include page="${ctx}/static/common/pager.jsp" />
 						</div>
