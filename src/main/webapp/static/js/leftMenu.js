@@ -1,4 +1,5 @@
-;define(["jquery"],function($){
+;define(["jquery","pager"],function($,pager){
+	var url="";
 	/**
 	 * 左侧菜单生成
 	 * @param ele:菜单外层元素，接受字符串
@@ -14,6 +15,7 @@
 				type: "get",
 				dataType: "json",
 				success: function(data){
+					url=url;
 					init(data);
 				},
 				error: function(){
@@ -21,6 +23,12 @@
 				}
 			})			
 		}
+		
+		/*$(".menu-a").click(function(ele){			 
+			console.info("ele:",ele.target);
+			console.info("ele id:",ele.target.id);
+		});
+	 */
 		
 		function init(data){
 			var h2 = "<h2 class='menu-h2'>";
@@ -31,17 +39,17 @@
 			var ul = h2 + "<ul>";
 			for(var i = 0; i <data.menu.length; i++){				
 				if(data.menu[i].id==data.columnId)
-					ul += "<li><a class='menu-a active' href='javascript:void(0)'>"+data.menu[i].name+"</a>" ;
+					ul += "<li><a class='menu-a active' href='javascript:void(0) id='"+data.menu[i].id+"'>"+data.menu[i].name+"</a>" ;
 				else
-				    ul += "<li><a class='menu-a' href='javascript:void(0)'>"+data.menu[i].name+"</a>" ;
+				    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].id+"'>"+data.menu[i].name+"</a>" ;
 				if(data.menu[i].children){
 					ul +="<ul id='"+data.menu[i].id +"' class='menu-list-second'>"
 					for(var j = 0; j <data.menu[i].children.length; j++){
 						if(data.menu[i].children[j].id==data.columnId){
-							ul += "<li><a class='menu-a active' href='javascript:void(0)'>"+data.menu[i].children[j].name+"</a>" ;						
+							ul += "<li><a class='menu-a active' href='javascript:void(0)' id='"+data.menu[i].children[j].id+"'>"+data.menu[i].children[j].name+"</a>" ;						
 						}
 						else						   
-						    ul += "<li><a class='menu-a' href='javascript:void(0)'>"+data.menu[i].children[j].name+"</a></li>" 
+						    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].children[j].id+"'>"+data.menu[i].children[j].name+"</a></li>" 
 					}
 					ul += "</ul>";
 				};
@@ -66,13 +74,26 @@
 			});
 		}
 		
+		
+		
+		pager.pagerGlobal(pager.methods);
+		var callback = function(){
+			$.each($("#policies-list-items").find(".content-item-date"),function(){
+				$(this).text(new Date(parseInt($(this).text())).Format("yyyy-MM-dd"));			
+			})
+		}
+		
 		// 会员中心菜单点击
-		$(ele).on("click",".menu-a", function(){
+		$(ele).on("click",".menu-a", function(e){		
 			var $this = $(this);
-			var href = $this.attr("data-href");
-			if(href){
+			console.info("e id:",e.target.id);
+			var columnId=e.target.id;
+//			showDeafaultTable(columnId,1,pageSize);
+			pager.methods.showTemplateTable(columnId,1, 3, "/portal/columnNewsPage",
+					"pagination","policies-list-items","tmpl",{},callback);
+
 				$.ajax({
-					url: href,
+					url: "",
 					type: "get",
 					dataType: "html",
 					cache: false,
@@ -87,7 +108,7 @@
 						console.log("找不到"+href);
 					}
 				})
-			}
+			
 			if($this.next("ul").length==0){
 				$(ele+" .menu-a").removeClass("active");
 				$this.addClass("active");

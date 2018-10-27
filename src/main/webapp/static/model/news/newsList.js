@@ -1,5 +1,5 @@
 require.config(config);
-require(["jquery", "leftMenu", "animation", "datepicker", "vue","pager","base"], function($, menu, animation, datepicker, Vue, pager ,base) {
+require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, animation,  pager ,base) {
 	
 	var itemList ="";
 	var leftTreeItems=""; 
@@ -96,30 +96,35 @@ require(["jquery", "leftMenu", "animation", "datepicker", "vue","pager","base"],
          }
         return null;
      }	 
-	function list2tree(list, idKey = "id", parentKey = "pId") {
-		let result = [];
-		let hash = {};
+	/**
+		 * 转换树
+		 */
+		 function list2tree(list, idKey, parentKey){
+			var result = [];
+			var hash = {};
+			//把数组遍历出用ID作为KEY的JSON对象
+		  $.each(list, function(i,ele){     
+			  hash[ele[idKey]] = ele;
+		  });    
+		  $.each(list, function(i,ele){
+ 				var _id = ele[idKey]; //当前节点的id
+ 				var _parentKey = hash[_id][parentKey]; //当前节点的父节点KEY
 
-		//把数组遍历出用ID作为KEY的JSON对象
-		list.forEach(ele => {
-			hash[ele[idKey]] = ele;
-		});
+ 				if(_parentKey && hash[_parentKey]) { //如果有父节点KEY，并且父节点存在
+ 					if(!hash[_parentKey].children) { //如果当前节点还没有子节点，为其添加一个空的子节点
+ 						hash[_parentKey].children = [];
+ 					}
+ 					hash[_parentKey].children.push(ele); //把当前节点添加到父节点的子节点路径上
+ 				} else {
+ 					result.push(ele); //添加没有父节点KEY或者没有父节点存在的节点到根节点上
+ 				}
+ 			
+		  });  
+			
+			return result;
+		}
 
-		list.forEach(ele => {
-			let _id = ele[idKey]; //当前节点的id
-			let _parentKey = hash[_id][parentKey]; //当前节点的父节点KEY
-
-			if(_parentKey && hash[_parentKey]) { //如果有父节点KEY，并且父节点存在
-				if(!hash[_parentKey].children) { //如果当前节点还没有子节点，为其添加一个空的子节点
-					hash[_parentKey].children = [];
-				}
-				hash[_parentKey].children.push(ele); //把当前节点添加到父节点的子节点路径上
-			} else {
-				result.push(ele); //添加没有父节点KEY或者没有父节点存在的节点到根节点上
-			}
-		});
-		return result;
-	}
+		
 	
 	function initMenu() { //初始化栏目方法
 		

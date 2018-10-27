@@ -14,6 +14,7 @@
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="icon" href="/static/images/jyht.ico" type="image/x-icon"/>
+ 
 </head>
 <body>
 	<script src="../static/js/require.js" data-main="${ctx}/static/model/news/newsList.js"></script>
@@ -44,8 +45,8 @@
 						<div class="inline-block content-header-date">发布时间</div>
 					</div>
 					<div id="policies-list">
-						 <ul id="policies-list-items" class="content-item-list">
-						</ul> 
+						<ul id="policies-list-items" class="content-item-list">
+						</ul>
 						<div id="pagination">
 							<jsp:include page="${ctx}/static/common/pager.jsp" />
 						</div>
