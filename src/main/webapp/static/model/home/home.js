@@ -429,7 +429,7 @@ require(["jquery","tab"],function($,flexslider){
 	         $.each(columnTwo,function(index,item){ 		
                  var li="";
                  li+="<li>" +
-                 		"<a  href='/news/list' target='_blank' class='news-title' >" +
+                       "<a href='/news/list?id="+item.id+"' class='news-title' >" +
                  		  "<img  src='/static/images/footer-icon.png' class='"
                  		   +item.icon+" "+item.theme+"'>"+
                  		"</a>"+

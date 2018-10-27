@@ -3,7 +3,7 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 	
 	var itemList ="";
 	var leftTreeItems=""; 
-	var columnId ="";
+	var columnId ="";	
 	
 	var menuData={
 			"title": "新闻动态",
@@ -139,7 +139,7 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 				leftTreeItems = list2tree(data.data, "id", "pColumnId");
 				menuData.title=leftTreeItems[0].name;
 				menuData.menu=leftTreeItems[0].children;
-				menuData.columnId=columnId;
+				menuData.columnId=columnId;				 
 				menu.setmenu("#menu", menuData,function(ele){			
 					$("#spec").val("");
 					if(ele.next("ul").length==0){

@@ -93,9 +93,6 @@
 						page.totalPage=parseInt(totalPage);
 						page.totalRow=parseInt(page.totalCount);
 						page.columnId=columnId;
-						for(var i=0;i<page.data.length;i++){
-							 page.data[i].publishDate= page.data[i].createTime;								 
-						}
 //						 console.info("page",page);
 						$('#' + this).setTemplateElement(
 							"pageMsgTemplate");

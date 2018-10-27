@@ -1,5 +1,6 @@
 ;define(["jquery","pager"],function($,pager){
 	var url="";
+	var breadcrumb="<a href='/salt/index'>首页</a>/";
 	/**
 	 * 左侧菜单生成
 	 * @param ele:菜单外层元素，接受字符串
@@ -37,23 +38,33 @@
 				}
 				h2+=data.title+"</h2>";
 			var ul = h2 + "<ul>";
+			console.info("data:",data);			
+			breadcrumb+=data.title;
 			for(var i = 0; i <data.menu.length; i++){				
-				if(data.menu[i].id==data.columnId)
-					ul += "<li><a class='menu-a active' href='javascript:void(0)' id='"+data.menu[i].id+
-					 "' type='"+data.menu[i].columnType+"'>"+data.menu[i].name+"</a>" ;
+				if(data.menu[i].id==data.columnId){
+					ul += "<li><a class='menu-a active'";
+					//处理面包屑
+					$("#breadcrumb").html(breadcrumb+"/"+data.menu[i].name);
+				}
 				else
-				    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].id+
-				    "' type='"+data.menu[i].columnType+"'>"+data.menu[i].name+"</a>" ;
+				    ul += "<li><a class='menu-a'";
+				    
+				    ul +="href='javascript:void(0)' id='"+data.menu[i].id+"' type='"+
+				          data.menu[i].columnType+"'>"+data.menu[i].name+"</a>" ;
+				    
 				if(data.menu[i].children){
 					ul +="<ul id='"+data.menu[i].id +"' class='menu-list-second'>"
 					for(var j = 0; j <data.menu[i].children.length; j++){
 						if(data.menu[i].children[j].id==data.columnId){
-							ul += "<li><a class='menu-a active' href='javascript:void(0)' id='"+data.menu[i].children[j].id+
-							      "' type='"+data.menu[i].children[j].columnType+"'>"+data.menu[i].children[j].name+"</a>" ;						
+							ul += "<li><a class='menu-a active'";		
+							//处理面包屑
+							$("#breadcrumb").html(breadcrumb+"/"+data.menu[i].children[j].name);
 						}
 						else						   
-						    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].children[j].id+
-						    "' type='"+data.menu[i].children[j].columnType+"'>"+data.menu[i].children[j].name+"</a>" ;
+						    ul += "<li><a class='menu-a'";
+						     
+						ul += "href='javascript:void(0)' id='"+data.menu[i].children[j].id+"' type='"+
+						      data.menu[i].children[j].columnType+"'>"+data.menu[i].children[j].name+"</a>"
 					}
 					ul += "</ul>";
 				};
@@ -95,12 +106,13 @@
 			var $this = $(this);
 			console.info("e :",e.target);
 			console.info("e id:",e.target.id);
-			console.info("e type:",e.target.type);
-			
+			console.info("e type:",e.target.type);			
 			var columnId=e.target.id;
 			var columnType=e.target.type;
 			if(columnType==6)
 				url="/portal/Questionnaire";
+			//处理面包屑
+			$("#breadcrumb").html(breadcrumb+"/"+$("#"+columnId).html());
 //			showDeafaultTable(columnId,1,pageSize);
 			pager.methods.showTemplateTable(columnId,pageNo, pageSize,url,
 					"pagination","policies-list-items","tmpl",{},callback);

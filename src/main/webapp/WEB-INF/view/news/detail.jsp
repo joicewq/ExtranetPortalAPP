@@ -8,7 +8,7 @@
 <html lang="en-us">
 <head>
 <meta charset="utf-8">
-<title>新闻动态</title>
+<title>外宣门户</title>
 <link rel="Shortcut Icon" href="/static/images/jgqt.ico">
 <meta name="description" content="">
 <meta name="author" content="">
