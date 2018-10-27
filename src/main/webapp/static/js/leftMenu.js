@@ -39,17 +39,21 @@
 			var ul = h2 + "<ul>";
 			for(var i = 0; i <data.menu.length; i++){				
 				if(data.menu[i].id==data.columnId)
-					ul += "<li><a class='menu-a active' href='javascript:void(0) id='"+data.menu[i].id+"'>"+data.menu[i].name+"</a>" ;
+					ul += "<li><a class='menu-a active' href='javascript:void(0)' id='"+data.menu[i].id+
+					 "' type='"+data.menu[i].columnType+"'>"+data.menu[i].name+"</a>" ;
 				else
-				    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].id+"'>"+data.menu[i].name+"</a>" ;
+				    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].id+
+				    "' type='"+data.menu[i].columnType+"'>"+data.menu[i].name+"</a>" ;
 				if(data.menu[i].children){
 					ul +="<ul id='"+data.menu[i].id +"' class='menu-list-second'>"
 					for(var j = 0; j <data.menu[i].children.length; j++){
 						if(data.menu[i].children[j].id==data.columnId){
-							ul += "<li><a class='menu-a active' href='javascript:void(0)' id='"+data.menu[i].children[j].id+"'>"+data.menu[i].children[j].name+"</a>" ;						
+							ul += "<li><a class='menu-a active' href='javascript:void(0)' id='"+data.menu[i].children[j].id+
+							      "' type='"+data.menu[i].children[j].columnType+"'>"+data.menu[i].children[j].name+"</a>" ;						
 						}
 						else						   
-						    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].children[j].id+"'>"+data.menu[i].children[j].name+"</a></li>" 
+						    ul += "<li><a class='menu-a' href='javascript:void(0)' id='"+data.menu[i].children[j].id+
+						    "' type='"+data.menu[i].children[j].columnType+"'>"+data.menu[i].children[j].name+"</a>" ;
 					}
 					ul += "</ul>";
 				};
@@ -84,12 +88,21 @@
 		}
 		
 		// 会员中心菜单点击
-		$(ele).on("click",".menu-a", function(e){		
+		$(ele).on("click",".menu-a", function(e){	
+			var url="/portal/columnNewsPage";
+			var pageNo=1;
+			var pageSize=10;
 			var $this = $(this);
+			console.info("e :",e.target);
 			console.info("e id:",e.target.id);
+			console.info("e type:",e.target.type);
+			
 			var columnId=e.target.id;
+			var columnType=e.target.type;
+			if(columnType==6)
+				url="/portal/Questionnaire";
 //			showDeafaultTable(columnId,1,pageSize);
-			pager.methods.showTemplateTable(columnId,1, 3, "/portal/columnNewsPage",
+			pager.methods.showTemplateTable(columnId,pageNo, pageSize,url,
 					"pagination","policies-list-items","tmpl",{},callback);
 
 				$.ajax({

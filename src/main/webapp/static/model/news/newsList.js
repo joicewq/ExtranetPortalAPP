@@ -10,7 +10,7 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 			"icon":"iconfont icon-lineflie",			 
 		};
 	
-	var pageSize = 3;
+	var pageSize = 10;
 	var url = "/portal/columnNewsPage";
 //	/article/query
 //	/portal/columnNewsPage

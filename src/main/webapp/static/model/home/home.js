@@ -232,6 +232,7 @@ require(["jquery","tab"],function($,flexslider){
 			tempInfo = data.message[0];
 		}
 		stationId=tempInfo.stationId;
+		localStorage.setItem("stationId",stationId);
 		if(isInit)
 		   initColumn();
 	});	 

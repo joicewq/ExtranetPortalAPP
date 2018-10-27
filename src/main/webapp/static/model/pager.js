@@ -1,7 +1,6 @@
 ;define(["jquery", "jtemp","animation"], function($, jtemp,animation) {
 	var pageSize = 10;
-
-	function showDeafaultTable(pageNo, pageSize) {
+	function showDeafaultTable(columnId,pageNo, pageSize) {
 		alert("请实现自己的分页查询!");
 	}
 
@@ -36,12 +35,12 @@
 			}
 		}
 		//pageNo = totalPageNo;
-		pager.showDeafaultTable(pageNo, pageSize);
+		pager.showDeafaultTable(columnId,pageNo, pageSize);
 	}
 
 	function selectPageSize(select) {
 		pageSize = $(select).val();
-		pager.showDeafaultTable(1, pageSize);
+		pager.showDeafaultTable(columnId,1, pageSize);
 	}
 
 	function afterSuccess() {}
@@ -55,7 +54,6 @@
 	 */
 	function showTemplateTable(columnId,pageNo, pageSize, url, pageMsgTemplateId,
 		tableTemplateId, tableTemplateTxtId, queryParams,callback) {
-
 		animation.load({
 			container:$("#" + tableTemplateId)
 		});
@@ -66,6 +64,7 @@
 			"pageSize": pageSize
 		};
 		$.extend(queryParams, pageParam); //将queryParams,pageParam合并到queryParams中,返回值为合并后的queryParams
+		
 		$.ajax({
 			url: url,
 			type: "post",
@@ -93,6 +92,7 @@
 						page.pageLine=parseInt(page.pageLine);
 						page.totalPage=parseInt(totalPage);
 						page.totalRow=parseInt(page.totalCount);
+						page.columnId=columnId;
 						for(var i=0;i<page.data.length;i++){
 							 page.data[i].publishDate= page.data[i].createTime;								 
 						}
