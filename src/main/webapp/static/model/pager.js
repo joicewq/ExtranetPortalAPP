@@ -53,7 +53,7 @@
 	 * tableTemplateTxtId 表的模版
 	 */
 	function showTemplateTable(columnId,pageNo, pageSize, url, pageMsgTemplateId,
-		tableTemplateId, tableTemplateTxtId, queryParams,callback) {
+		tableTemplateId, tableTemplateTxtId, menuTitle,callback) {
 		animation.load({
 			container:$("#" + tableTemplateId)
 		});
@@ -61,14 +61,15 @@
 		var pageParam = {
 			"columnId":columnId,
 			"pageNo": pageNo,
-			"pageSize": pageSize
+			"pageSize": pageSize,
+			"menuTitle":menuTitle
 		};
-		$.extend(queryParams, pageParam); //将queryParams,pageParam合并到queryParams中,返回值为合并后的queryParams
+//		$.extend(menuData, pageParam); //将queryParams,pageParam合并到queryParams中,返回值为合并后的queryParams
 		
 		$.ajax({
 			url: url,
 			type: "post",
-			data: queryParams,
+			data: pageParam,
 			dataType: "json",
 			success: function(page) {
 				
@@ -92,8 +93,18 @@
 						page.pageLine=parseInt(page.pageLine);
 						page.totalPage=parseInt(totalPage);
 						page.totalRow=parseInt(page.totalCount);
-						page.columnId=columnId;
-//						 console.info("page",page);
+						page.columnId=columnId;						
+//						console.info("page",page);
+						page.menuTitle=pageParam.menuTitle;
+						
+						 
+						/*if(!isEmpty($("#breadcrumb").html())){
+							var  breadcrumb=($("#breadcrumb").html()+"").split("</a>");
+							console.info("split：",breadcrumb);
+							page.menuTitle=breadcrumb[1];
+						}*/
+						console.info("page.menuTitle：",page.menuTitle);
+
 						$('#' + this).setTemplateElement(
 							"pageMsgTemplate");
 						$('#' + this).processTemplate(page);
@@ -174,6 +185,53 @@
 		}*/
 		window.pager=pager;
 	}
+	/**
+	 * 判断一个对象是否为空，其中字段串""也算是空
+	 */
+	function isEmpty(object) {
+		var flag = false;
+
+		switch(typeof(object)) {
+		case("undefined"):
+		{
+			flag = true;
+			break;
+		}
+		case("number"):
+		{
+			break;
+		}
+		case("string"):
+		{
+			if(object == "") {
+				flag = true;
+			}
+			break;
+		}
+		case("boolean"):
+		{
+			break;
+		}
+		case("object"):
+		{
+			if(object == null) {
+				flag = true;
+			}
+			break;
+		}
+		case("function"):
+		{
+			break;
+		}
+		default:
+		{
+			flag = true;
+			break;
+		}
+		}
+		return flag;
+	}
+	
 		
 	
 	return {

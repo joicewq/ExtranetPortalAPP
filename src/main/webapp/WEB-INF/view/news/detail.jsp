@@ -21,13 +21,15 @@
 
 			<div class="content">
 				<div class="article-wrap">
-					<!-- <div>返回</div> -->
+					 
 					<div class="article-header">
+					<span id="lastPage">返回</span>
 						<h2 class="article-title"></h2>
 						<div class="article-info">
 							<div class="inline-block">发布时间：<span id="filterPublishTime"></span></div>
 							<br/>
-							<!-- <div class="inline-block">来源：<span id="contentFrom"></span></div> -->
+							<div class="inline-block">来源：<span id="contentFrom"></span></div>
+							<div class="inline-block"> 字号： [大] [中] [小]</span></div>
 							<%-- <input type="hidden" value="${News.publishDate}" id="publishTime" /> --%>
 							<%-- <div class="inline-block ml40">浏览人数：<span>${PoliciesInfo.title}</span></div> --%>
 						</div>
@@ -38,10 +40,12 @@
 						<div class="article-accessory article-module">
 							<input type="hidden" value="${News.uploadIds}" id="accessory" />	
 							<input type="hidden" value="${upload_url}" id="accessory_url" />
-							<div class="article-accessory-title"><i class="iconfont icon-fujian"></i> 附件下载</div>
-							<div id="uploadDiv" class="clearfix hide"></div>
+							<div class="article-accessory-title"><i class="iconfont icon-fujian"></i> 
+							       <span id="docDown"></span>
+							</div>
+							<!-- <div id="uploadDiv" class="clearfix hide"></div>
 							<ul class="article-accessory-list">
-							</ul>
+							</ul> -->
 						</div>
 					</c:if>
 				</div>

@@ -25,7 +25,7 @@
 				<div class="" id="menu"></div>
 			</div>
 			<div class="right-content content">
-				<div class="search-wrap">
+				<!-- <div class="search-wrap">
 					<div class="tb_search">
 						<div class="form-group">
 							<label for="spec">日期查询：</label>
@@ -39,7 +39,7 @@
 						</div>
 						<a class="ds-btn ds-btn-small ds-btn-primary" id="queryBtn"><i class="fa fa-search"></i> 搜索</a>
 					</div>
-				</div>
+				</div> -->
 				<div class="content-list">
 					<div class="content-header">
 						<div class="inline-block content-header-title">标题</div>
@@ -61,7 +61,7 @@
 						{#if $T.totalRow>0}
 							{#foreach $T.data as row}
 								<li>
-									<a href="/news/detail?id={$T.row.id}" target="_blank" class="content-item-title inline-block">{$T.row.title}</a>
+									<a href="/news/detail?id={$T.row.id}&columnId={$T.columnId}" target="_blank" class="content-item-title inline-block">{$T.row.title}</a>
 									<span class="content-item-date inline-block">{$T.row.createTime}</span>
 								</li>
 							{#/for}

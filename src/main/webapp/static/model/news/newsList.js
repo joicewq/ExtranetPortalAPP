@@ -19,7 +19,8 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 		var data={
 			startDate:$("#startDTime").val(),
 			endDate:$("#endDTime").val(),
-			title:$("#spec").val()
+			title:$("#spec").val(),
+			breadcrumb:$("#breadcrumb").html(),
 		};
 		data.columnName="新闻动态";
 		if($(".menu-a.active").text()=="盐业动态"){
@@ -29,7 +30,7 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 			data.type=1;
 		}
 		data=(params==undefined?data:$.extend({},data,params));
-		pager.methods.showTemplateTable(columnId,pageNo, pageSize, url,"pagination","policies-list-items","tmpl",data,callback);		
+		pager.methods.showTemplateTable(columnId,pageNo, pageSize, url,"pagination","policies-list-items","tmpl",menuData.title,callback);		
 	}
 	pager.pagerGlobal(pager.methods);
 	var callback = function(){
@@ -140,8 +141,8 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 				menuData.title=leftTreeItems[0].name;
 				menuData.menu=leftTreeItems[0].children;
 				menuData.columnId=columnId;				 
-				menu.setmenu("#menu", menuData,function(ele){			
-					$("#spec").val("");
+				menu.setmenu("#menu", menuData,function(ele){	
+				$("#spec").val("");
 					if(ele.next("ul").length==0){
 						showDeafaultTable(columnId,1,pageSize);
 					}
@@ -149,8 +150,6 @@ require(["jquery", "leftMenu", "animation","pager","base"], function($, menu, an
 			} else {
 				console.info("初始化栏目失败：" + data.msg);
 			}			
-			
-
 		});			 
 	}
 	

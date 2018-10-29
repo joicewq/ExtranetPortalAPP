@@ -25,8 +25,7 @@
 						<li><a href="javascript:pager.showDeafaultTable('{$T.columnId}',1,{$T.pageLine});">首页</a></li>
 						{#else}{* 没有上一页*}
 							<li><a href="javascript:void(0);">首页</a></li>
-						{#/if}
-					  </li>
+						{#/if}					  
 		              
 					  	{#if $T.curPage>1}
 							<li><a href="javascript:pager.showDeafaultTable('{$T.columnId}',{$T.curPage-1},{$T.pageLine});">上一页</a></li>
@@ -66,7 +65,7 @@
                     <li>页</li>
                     <li><a onclick="javascript:pager.showDeafaultTable('{$T.columnId}',$('#pageNum').val(),{$T.pageLine})" class="active hover">确定</a></li>
 	              </ul>
-	          </div>
+	         
 	      </div>
 	      
 	]]>
