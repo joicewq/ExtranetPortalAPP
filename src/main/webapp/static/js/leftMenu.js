@@ -109,13 +109,16 @@
 			console.info("e type:",e.target.type);			
 			var columnId=e.target.id;
 			var columnType=e.target.type;
-			if(columnType==6)
+			var data={}
+			if(columnType==6){
+				data.stationId="0";//这里的更加站群改变
 				url="/portal/Questionnaire";
+			}
 			//处理面包屑
 			$("#breadcrumb").html(breadcrumb+"/"+$("#"+columnId).html());
 //			showDeafaultTable(columnId,1,pageSize);
 			pager.methods.showTemplateTable(columnId,pageNo, pageSize,url,
-					"pagination","policies-list-items","tmpl",{},callback);
+					"pagination","policies-list-items","tmpl",data,callback);
 
 				$.ajax({
 					url: "",
