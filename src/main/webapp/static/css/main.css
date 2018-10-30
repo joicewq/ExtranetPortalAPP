@@ -1828,7 +1828,7 @@ table.ds-commodity-datalist th{
     white-space: nowrap;
 }
 .content-header .content-header-date,.content-item-list .content-item-date{
-	width: 100px;
+	/*  width: 100px;*/
 	float: right;
 	color: #8c8c8c;
 }

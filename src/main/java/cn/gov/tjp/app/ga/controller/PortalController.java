@@ -711,9 +711,16 @@ public class PortalController extends PublicController {
 	public  Map<String, Object> queryQuestionnaire(HttpServletRequest request,String stationId) {
 		Map<String, Object> resultMap = null;
 		try {
-		String url = UrlUtil.QUESTIONNAIRE_API_URL + "/survey/pullColumn?columnId="+stationId;
-		String result = super.commonInvoke(url,VariableUtil.TYPE_GET,null);
-			resultMap = CommonUtil.OM.readValue(result, Map.class);
+			Map<String, Object> params = CommonUtil.para2Map(request);
+			String pageNo = params.get("pageNo").toString();
+			String pageSize = params.get("pageSize").toString();
+			String url = UrlUtil.QUESTIONNAIRE_API_URL + "/survey/pullColumn?columnId="+stationId;
+			String result = super.commonInvoke(url,VariableUtil.TYPE_GET,null);
+			String dataResutl = JSON.parseObject(result).get("data").toString();
+			resultMap = CommonUtil.OM.readValue(dataResutl, Map.class);
+			resultMap.put("pageLine", pageSize);
+			resultMap.put("totalPage", setMaxSize(Integer.parseInt(pageNo), Integer.parseInt(pageSize)));
+			resultMap.put("currentPage", pageNo);
 		}  catch (Exception e) {
 			LOGGER.error(e.toString());
 			resultMap = new HashMap<String, Object>();
@@ -804,5 +811,19 @@ public class PortalController extends PublicController {
 			resultMap.put(VariableUtil.CODE, VariableUtil.ERROR);
 		}
 		return resultMap;
+	}
+	/**
+	 * 设置查询到分页的最大值
+	 * 
+	 * @author : wq
+	 * @param maxSize
+	 * @date : 2017年5月24日下午7:22:54
+	 */
+	@SuppressWarnings("unused")
+	private Integer setMaxSize(Integer maxSize,Integer pageSize) {
+		// 把最大页数计算出来
+		Integer maxNo = maxSize / pageSize;
+		Integer remainder = maxSize % pageSize;
+		return maxNo = maxNo + (remainder == 0 ? 0 : 1);
 	}
 }

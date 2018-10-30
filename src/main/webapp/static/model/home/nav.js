@@ -137,8 +137,18 @@
 			$.each(data,function(i,ele){
 				var thisObj=$(ele)[0];
 				var $li=$("<li></li>");
-//				var url=thisObj["url"]==null?"":thisObj["url"];
-				var $a = $("<a></a>").text(thisObj["name"]).attr("href","");
+				var url="";
+				if(ele.columnType=="1" || ele.columnType=="4"){
+					url="/salt/list?id="+ele.id+"&columnType="+ele.columnType
+				}else if(ele.columnType=="2" ){
+					url="/salt/list?id="+ele.id+"&columnType="+ele.columnType
+				}else if(ele.columnType=="6" ){
+					url="/salt/questionlist?id="+ele.id+"&columnType="+ele.columnType
+				}else{
+					url=thisObj["url"];
+				}
+				//var url=thisObj["url"]==null?"":thisObj["url"];
+				var $a = $("<a></a>").text(thisObj["name"]).attr("href",url);
 				if(typeof thisObj["children"] != "undefined"){
 					var $ul = $("<ul></ul>").addClass("hide child-nav");
 					$li.addClass("has-child").append($ul);
@@ -175,7 +185,7 @@
  		 */
  		function queryColumn(){
  			var params = {
- 					portalType:"2",//"2",
+ 					portalType:"2",//"2"页面加载获取站群ID
 					isDisplay: "1",//栏目是否在前段显示
 					columnNode:"0",//通过顶级栏目ID查询所以子集
 					orderBySort: "1"
@@ -190,7 +200,9 @@
  					if(msg.code == "1"){
  						var data = msg.data;
  						var dataItem = list2tree(data, "id", "pColumnId");
- 						createNav(dataItem,$("#nav"));		
+ 						window.localStorage.setItem("Tree",JSON.stringify(dataItem));
+ 						createNav(dataItem,$("#nav"));	
+ 					
  					}else{
  						layer.msg("操作失败",{icon:2});
  					}
@@ -228,8 +240,6 @@
  			
  			return result;
  		}
- 
- 		
  		/**
  		 * 搜索
  		 */

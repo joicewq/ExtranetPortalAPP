@@ -65,6 +65,21 @@ public class HomeController {
 		request.setAttribute("upload_url", upload_url);
 		return "/home/home";
 	}
+	
+	@RequestMapping("/list")
+	public String moreIndex(Model model){
+		return "/news/list";
+	}
+	@RequestMapping("/questionlist")
+	public String questionIndex(Model model){
+		return "/notices/list";
+	}
+	@RequestMapping("/querstionDetail")
+	public String detail(HttpServletRequest request,Model model){
+		String quesiton = request.getParameter("id");
+		System.out.println(quesiton);
+		return "/notices/detail";
+	}
 
 	/**
 	 * 搜索

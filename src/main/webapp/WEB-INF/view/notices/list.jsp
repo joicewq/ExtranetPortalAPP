@@ -8,7 +8,7 @@
 <html lang="en-us">
 <head>
 <meta charset="utf-8">
-<title>通知公告</title>
+<title>天津市外宣门户</title>
 <link rel="Shortcut Icon" href="/static/images/jgqt.ico">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -17,23 +17,11 @@
 <body>
 	<script src="../static/js/require.js" data-main="${ctx}/static/model/notice/noticeList.js"></script>
 	<jsp:include page="${ctx}/static/common/header.jsp" />
-	<div class="ds-main" id="container">
-			<div class="content">
-				<div class="search-wrap">
-					<div class="tb_search">
-						<div class="form-group">
-							<label for="spec">日期查询：</label>
-							<input type="text" name="startDTime" id="startDTime" class="date-inp Wdate  required" onclick="WdatePicker({maxDate:'%y-%M-%d'})"> 
-							至
-							<input type="text" name="endDTime" id="endDTime" class="date-inp Wdate required" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startDTime\')}',maxDate:'%y-%M-%d'})">
-						</div>
-						<div class="form-group">
-							<label for="spec">标题查询：</label>
-							<input type="text" name="spec" id="spec">
-						</div>
-						<a class="ds-btn ds-btn-small ds-btn-primary" id="queryBtn"><i class="fa fa-search"></i> 搜索</a>
-					</div>
-				</div>
+	 <div class="ds-main" id="container">
+			<div class="pull-left" style="width:200px">
+				<div class="" id="menu"></div>
+			</div>
+			<div class="right-content content">
 				<div class="content-list">
 					<div class="content-header">
 						<div class="inline-block content-header-title">标题</div>
@@ -55,8 +43,8 @@
 						{#if $T.totalRow>0}
 							{#foreach $T.data as row}
 								<li>
-									<a href="/notice/detail?id={$T.row.id}" target="_blank" class="content-item-title inline-block">{$T.row.title}</a>
-									<span class="content-item-date inline-block">{$T.row.publishDate}</span>
+									<a onclick="itemClick(this)" type="{$T.row.forDepartment},{$T.row.forObject},{$T.row.paperCode},{new Date($T.row.startTime).Format("yyyy-MM-dd")},{new Date($T.row.endTime).Format("yyyy-MM-dd")},{$T.row.paperName},{$T.row.paperRemark},{$T.row.id}" target="_blank" class="content-item-title inline-block">{$T.row.paperName}</a>
+									<span class="content-item-date inline-block">{new Date($T.row.startTime).Format("yyyy-MM-dd")} 至 {new Date($T.row.endTime).Format("yyyy-MM-dd")}</span>
 								</li>
 							{#/for}
 						{#else}
@@ -66,7 +54,22 @@
 						{#if}
 					{#/template MAIN}
 			]]>
-		</textarea>
+		</textarea> 
 		<jsp:include page="${ctx}/static/common/footer.jsp" />
 </body>
 </html>
+<script type="text/javascript">
+ function itemClick(obj){
+	 var arrList = obj.type.split(",");
+	 var questionnaireform={//forDepartment,forObject,paperCode,startTime,endTime,paperName,paperRemark
+			 	forDepartment: encodeURI(arrList[0]),  //调研部门{$T.row.forDepartment},{$T.row.forObject},{$T.row.paperCode},{$T.row.startTime},{$T.row.endTime},{$T.row.paperName},{$T.row.paperRemark}
+		        forObject: encodeURI(arrList[1]),   //调研对象
+		        paperCode: arrList[2],    //问卷编码
+		        startTime: arrList[3],    
+		        endTime: arrList[4],
+		        paperName: encodeURI(arrList[5]),   //问卷名称
+				paperRemark: encodeURI(arrList[6])
+	} 
+	 window.location.href="/salt/querstionDetail?id=" + arrList[7]+"&questionnaireform="+JSON.stringify(questionnaireform)
+}
+</script>

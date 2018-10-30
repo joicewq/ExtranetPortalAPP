@@ -129,28 +129,10 @@ require(["jquery", "animation" ], function($,animation) {
 		
 	}
 	function iniPageDate(){
-		var lastPage="<a href='/salt/index'>返回</a>";		
-		
-		console.info("columnId:",getQueryString("columnId"));
-		if(!isEmpty(getQueryString("columnId")))
-			lastPage="<a href='/news/list?id="+getQueryString("columnId")+"'>返回</a>";
-		console.info("lastPage:",lastPage);
 		$(".article-title ").html(newsInfo.title);
 		$("#filterPublishTime ").html(initDate(newsInfo.updateTime));
-		$("#contentFrom ").html(initDate(newsInfo.cfrom));
+//		$("#contentFrom ").html(initDate(newsInfo.updateTime));
 		$("#contentData ").html(newsInfo.content);
-		$("#lastPage ").html(lastPage);
-		
-		if(!isEmpty(newsInfo.pdfId)){
-			var docUrl="/doc/download/";
-			$.post("/portal/getEnv",{},
-			function(data,status){	
-				docUrl=data.docAppUrl+docUrl; 
-				var docDown="<a href='"+docUrl+newsInfo.pdfId+"'>附件下载</a>";
-				$("#docDown ").html(docDown);
-			});				
-		}
-		
 		
 	}
 	
