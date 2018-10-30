@@ -80,24 +80,24 @@ require(["jquery", "animation" ], function($,animation) {
 	  * 格式时间(yyyy-MM-dd)
 	  */
 	 function formatDate_date(stamp) {
-	 	let date = new Date(stamp);
-	 	let year = date.getFullYear();
-	 	let month = date.getMonth() + 1;
-	 	let day = date.getDate();
+	 	var date = new Date(stamp);
+	 	var year = date.getFullYear();
+	 	var month = date.getMonth() + 1;
+	 	var day = date.getDate();
 	 	return year + "-" + (month > 9 ? month : ("0" + month)) + "-" + (day > 9 ? day : ("0" + day));
 	 }
 	 /**
 	  * 格式时间(yyyy-MM-dd HH-mm-ss)
 	  */
 	 function formatDate_time(stamp) {
-	 	let date = new Date(stamp);
-	 	let hour = date.getHours();
-	 	let minute = date.getMinutes();
-	 	let second = date.getSeconds();
+	 	var date = new Date(stamp);
+	 	var hour = date.getHours();
+	 	var minute = date.getMinutes();
+	 	var second = date.getSeconds();
 	 	return formatDate_date(stamp) + " " + (hour > 9 ? hour : ("0" + hour)) + ":" + (minute > 9 ? minute : ("0" + minute)) + ":" + (second > 9 ? second : ("0" + second));
 	 }
 	  function initDate(_date) { //格式时间方法
-		let result = "";
+		var result = "";
 			//如果传入的参数不为空就格式
 			if(!isEmpty(_date)) {
 				result = formatDate_time(_date);
@@ -129,10 +129,28 @@ require(["jquery", "animation" ], function($,animation) {
 		
 	}
 	function iniPageDate(){
+		var lastPage="<a href='/salt/index'>返回</a>";		
+		
+		console.info("columnId:",getQueryString("columnId"));
+		if(!isEmpty(getQueryString("columnId")))
+			lastPage="<a href='/news/list?id="+getQueryString("columnId")+"'>返回</a>";
+		console.info("lastPage:",lastPage);
 		$(".article-title ").html(newsInfo.title);
 		$("#filterPublishTime ").html(initDate(newsInfo.updateTime));
-//		$("#contentFrom ").html(initDate(newsInfo.updateTime));
+		$("#contentFrom ").html(initDate(newsInfo.cfrom));
 		$("#contentData ").html(newsInfo.content);
+		$("#lastPage ").html(lastPage);
+		
+		if(!isEmpty(newsInfo.pdfId)){
+			var docUrl="/doc/download/";
+			$.post("/portal/getEnv",{},
+			function(data,status){	
+				docUrl=data.docAppUrl+docUrl; 
+				var docDown="<a href='"+docUrl+newsInfo.pdfId+"'>附件下载</a>";
+				$("#docDown ").html(docDown);
+			});				
+		}
+		
 		
 	}
 	

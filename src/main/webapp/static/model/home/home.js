@@ -375,7 +375,7 @@ require(["jquery","tab"],function($,flexslider){
 		      $.each(item.list,function(index,itemList){ 
                  var li="";
                  li+="<li>" +
-                 		"<a  href='/news/detail?id="+itemList.id+"' target='_blank' class='news-title' >"+itemList.title+"</a>"+
+                 		"<a  href='/news/detail?id="+itemList.id+"' target='_parent' class='news-title' >"+itemList.title+"</a>"+
 					    "<span class='news-hot-icon'></span>"+
 					    "<span class='news-date' >"+itemList.date+"</span>"+
 					 "</li>";

@@ -127,11 +127,11 @@ require(["jquery","path","Vue","animation","validator","tab"],function($,path,Vu
 	}
 	
 	$(function(){
-		animation.pageLoad({});//预留动画过渡，后期优化
+		/*animation.pageLoad({});//预留动画过渡，后期优化
 		forEachList({});
 		tab({
 			tabContainer: $(".tab-contentmian"),
 			tabTitleWrap: $(".tabs")
-		});
+		});*/
 	})
 })

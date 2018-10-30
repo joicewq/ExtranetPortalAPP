@@ -20,8 +20,8 @@ function getEnv(){
 }
 $(function(){
 	getEnv();
+}) 
 	location.href = "/salt/index";
-})
 	
 </script>
 </head>
