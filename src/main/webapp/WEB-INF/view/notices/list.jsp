@@ -43,7 +43,7 @@
 						{#if $T.totalRow>0}
 							{#foreach $T.data as row}
 								<li>
-									<a onclick="itemClick(this)" type="{$T.row.forDepartment},{$T.row.forObject},{$T.row.paperCode},{new Date($T.row.startTime).Format("yyyy-MM-dd")},{new Date($T.row.endTime).Format("yyyy-MM-dd")},{$T.row.paperName},{$T.row.paperRemark},{$T.row.id}" target="_blank" class="content-item-title inline-block">{$T.row.paperName}</a>
+									<a onclick="itemClick(this)" type="{$T.row.forDepartment}↑{$T.row.forObject}↑{$T.row.paperCode}↑{new Date($T.row.startTime).Format("yyyy-MM-dd")}↑{new Date($T.row.endTime).Format("yyyy-MM-dd")}↑{$T.row.paperName}↑{$T.row.paperRemark}↑{$T.row.id}" target="_blank" class="content-item-title inline-block">{$T.row.paperName}</a>
 									<span class="content-item-date inline-block">{new Date($T.row.startTime).Format("yyyy-MM-dd")} 至 {new Date($T.row.endTime).Format("yyyy-MM-dd")}</span>
 								</li>
 							{#/for}
@@ -60,7 +60,7 @@
 </html>
 <script type="text/javascript">
  function itemClick(obj){
-	 var arrList = obj.type.split(",");
+	 var arrList = obj.type.split("↑");
 	 var questionnaireform={//forDepartment,forObject,paperCode,startTime,endTime,paperName,paperRemark
 			 	forDepartment: encodeURI(arrList[0]),  //调研部门{$T.row.forDepartment},{$T.row.forObject},{$T.row.paperCode},{$T.row.startTime},{$T.row.endTime},{$T.row.paperName},{$T.row.paperRemark}
 		        forObject: encodeURI(arrList[1]),   //调研对象
@@ -70,6 +70,7 @@
 		        paperName: encodeURI(arrList[5]),   //问卷名称
 				paperRemark: encodeURI(arrList[6])
 	} 
+	 debugger;
 	 window.location.href="/salt/querstionDetail?id=" + arrList[7]+"&questionnaireform="+JSON.stringify(questionnaireform)
 }
 </script>
