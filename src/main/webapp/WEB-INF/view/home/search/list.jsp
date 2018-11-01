@@ -75,9 +75,7 @@
 					         <input class="ds-inp-control ds-inp-control-min" placeholder="请选择起始时间" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="updateTime1" id="updateTime1" />
 			                	至
 			                 <input class="ds-inp-control ds-inp-control-min" placeholder="请选择终止时间" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"name="updateTime2" id="updateTime2"/>
-					         <!-- <input type="text" name="updateTime1" id="updateTime1" value="2018-10-1" > ~
-							 <input type="text" name="updateTime2" id="updateTime2" value="2018-10-10"  >
-							 <input type="text" onfocus="WdatePicker({minDate:'2013-09-14', maxDate:'2013-9-20'})"/>   -->  
+					         
 					      </td>
 					   </tr>
 					   <tr>
