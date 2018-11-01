@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-</head>
+</head>   
 <body>
 	<script type="text/javascript" src="${ctx}/static/js/My97DatePicker/WdatePicker.js"></script> 
 	<script src="/static/js/require.js" data-main="/static/model/home/serach.js"></script>
