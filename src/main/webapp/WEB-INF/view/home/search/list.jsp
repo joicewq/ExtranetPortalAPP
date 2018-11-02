@@ -9,12 +9,13 @@
 <head>
 <meta charset="utf-8">
 <title>检索</title>
-<link rel="Shortcut Icon" href="/static/images/jgqt.ico">
+<link rel="Shortcut Icon" href="/static/images/jgqt.ico">   
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-</head>
+</head>   
 <body>
+	<script type="text/javascript" src="${ctx}/static/js/My97DatePicker/WdatePicker.js"></script> 
 	<script src="/static/js/require.js" data-main="/static/model/home/serach.js"></script>
 	<jsp:include page="/static/common/header.jsp" />
 	<div class="ds-main">
@@ -27,7 +28,6 @@
 							<input type="text" name="title" id="title" value="${title }">
 						</div>
 						<a class="ds-btn ds-btn-small ds-btn-primary" id="queryBtn"><i class="fa fa-search"></i> 搜索</a>
-						<a class="ds-btn ds-btn-small ds-btn-primary" id="superQueryBtn"><i class="fa fa-search"></i> 高级搜索</a>
 					   <table style="width:100%;">
 					   <tr>
 					     <td>
@@ -72,8 +72,12 @@
 					         <input  type="radio" id="updateTimeFlag" name="updateTimeFlag"	value="4">最近一月
 					         <input  type="radio" id="updateTimeFlag" name="updateTimeFlag"	value="5">最近一年
 					         <input  type="radio" id="updateTimeFlag" name="updateTimeFlag"	value="6">自定义
-					         <input type="text" name="updateTime1" id="updateTime1" value="2018-10-1" > ~
+					         <input class="ds-inp-control ds-inp-control-min" placeholder="请选择起始时间" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="updateTime1" id="updateTime1" />
+			                	至
+			                 <input class="ds-inp-control ds-inp-control-min" placeholder="请选择终止时间" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"name="updateTime2" id="updateTime2"/>
+					         <!-- <input type="text" name="updateTime1" id="updateTime1" value="2018-10-1" > ~
 							 <input type="text" name="updateTime2" id="updateTime2" value="2018-10-10"  >
+							 <input type="text" onfocus="WdatePicker({minDate:'2013-09-14', maxDate:'2013-9-20'})"/>   -->  
 					      </td>
 					   </tr>
 					   <tr>
@@ -112,6 +116,13 @@
 					         <input  type="radio" id="keyLocation" name="keyLocation" value="2">网页标题中
 					         <input  type="radio" id="keyLocation" name="keyLocation" value="3">网页正文中
 					         <input  type="radio" id="keyLocation" name="keyLocation" value="4">网页网址
+					      </td>
+					   </tr>
+					   <tr>
+					     <td>
+					       <a class="ds-btn ds-btn-small ds-btn-primary" id="superQueryBtn"><i class="fa fa-search"></i> 高级搜索</a>
+					     </td>
+					     <td>
 					      </td>
 					   </tr>
 					   </table>
