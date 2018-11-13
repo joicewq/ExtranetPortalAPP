@@ -8,7 +8,7 @@
 <html lang="en-us">
 <head>
 <meta charset="utf-8">
-<title>外宣门户</title>
+<title>天津市外宣门户</title>
 <link rel="Shortcut Icon" href="/static/images/jgqt.ico">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -19,9 +19,9 @@
 <body>
 	<script src="../static/js/require.js" data-main="${ctx}/static/model/news/newsList.js"></script>
 	<jsp:include page="${ctx}/static/common/header.jsp" />
-	<span id="breadcrumb"></span>
+	<div id="breadcrumb" class="breadcrumb"></div>
 	<div class="ds-main" id="container">
-			<div class="pull-left" style="width:200px">
+			<div class="pull-left">
 				<div class="" id="menu"></div>
 			</div>
 			<div class="right-content content">
@@ -41,10 +41,10 @@
 					</div>
 				</div> -->
 				<div class="content-list">
-					<div class="content-header">
+					<!-- <div class="content-header">
 						<div class="inline-block content-header-title">标题</div>
 						<div class="inline-block content-header-date">发布时间</div>
-					</div>
+					</div> -->
 					<div id="policies-list">
 						<ul id="policies-list-items" class="content-item-list">
 						</ul>
@@ -66,7 +66,7 @@
 								</li>
 							{#/for}
 						{#else}
-							<li>
+							<li style="background-image:none;">
 								<div class="text-center">无符合条件数据</div>
 							</li>
 						{#/if}

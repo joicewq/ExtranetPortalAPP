@@ -17,13 +17,14 @@
 <body>
 	<script src="../static/js/require.js" data-main="${ctx}/static/model/news/newsDetail.js"></script>
 	<jsp:include page="${ctx}/static/common/header.jsp" />
+	<div id="breadcrumb" class="breadcrumb"></div>
 	<div class="ds-main">
 
 			<div class="content">
 				<div class="article-wrap">
 					 
 					<div class="article-header">
-					<span id="lastPage">返回</span>
+					<span id="lastPage" class="btn-back"><i class="fa fa-arrow-circle-left"></i>返回</span>
 						<h2 class="article-title"></h2>
 						<div class="article-info">
 							<div class="inline-block">发布时间：<span id="filterPublishTime"></span></div>

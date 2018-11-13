@@ -17,16 +17,17 @@
 <body>
 	<script src="../static/js/require.js" data-main="${ctx}/static/model/notice/noticeList.js"></script>
 	<jsp:include page="${ctx}/static/common/header.jsp" />
+	<div id="breadcrumb" class="breadcrumb"></div>
 	 <div class="ds-main" id="container">
 			<div class="pull-left" style="width:200px">
 				<div class="" id="menu"></div>
 			</div>
 			<div class="right-content content">
 				<div class="content-list">
-					<div class="content-header">
+					<!-- <div class="content-header">
 						<div class="inline-block content-header-title">标题</div>
 						<div class="inline-block content-header-date">发布时间</div>
-					</div>
+					</div> -->
 					<div id="policies-list">
 						<ul id="policies-list-items" class="content-item-list">
 						</ul>

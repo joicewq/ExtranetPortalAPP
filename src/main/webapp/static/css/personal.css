@@ -11,14 +11,12 @@
 }
 .menu-list .menu-h2 {
 	background: #f7f5fa;
-	height: 36px;
-	line-height: 36px;
-	border: 1px solid #ccc;
-	border-top-color: #48a6e6;
-	font-size: 16px;
+	height: 42px;
+	line-height: 42px;
+	font-size: 18px;
 }
 .menu-list li {
-	line-height: 36px;
+	line-height: 42px;
 	border: 1px solid #ccc;
 	border-top: 0;
 	position: relative;
@@ -34,13 +32,13 @@
 	right: 15px;
 }
 .menu-a.active, .menu-a:hover {
-	color: #fff;
-	background: #48a6e6;
+	color: #333;
+	background: #e7f4fd;
 	cursor: pointer;
 }
 .menu-list-second {
 	display: none;
-	background: #f7f5fa;
+	background: #e7f4fd;
 }
 .menu-list-second li {
 	border: 0;
@@ -384,7 +382,7 @@ input.input-nobor:focus, input.input-bm-bor:focus {
 }
 /* 表单 */
 .form-list, .div-center {
-	width: 860px;
+	width: 100% ;
 	margin: 0 auto;
 }
 @media (min-width: 1560px){
@@ -420,6 +418,8 @@ input.input-nobor:focus, input.input-bm-bor:focus {
 .form-list > li .label .sm-title {
 	display: inline-block;
 	width: 160px;
+	padding-right: 20px ;
+	line-height: 40px ;
 	text-align: right;
 	white-space: normal;
 }
@@ -443,16 +443,55 @@ input.input-nobor:focus, input.input-bm-bor:focus {
 }
 .form-list > li.li-per .label .sm-title {
 	float: left;
-	margin-right: 4px;
-	margin-top: 5px;
+	width: 160px;
+	padding-right: 20px ;
+	line-height: 40px ;
+	text-align: right;
 }
 .form-list > li .label textarea {
-	width: 649px;
+	float: left;
+	width: 900px;
+	height:40px ;
+	line-height:40px ;
+	padding: 0px 10px ;
+	overflow: hidden ;
+	border-radius:4px ;
+}
+.form-list > li .label textarea#paperRemark,
+.form-list > li .label textarea#forObject{
+	height:50px ;
+	line-height: 20px ;
+	padding: 10px ;
+	overflow-y: scroll ;
+}
+.form-list > li .label textarea:disabled{
+	color: #898989 ;
+	background: #f5f7fa ;
+	
 }
 .form-list-tip {
 	position: absolute;
 	left: 170px;
 	display: none;
+}
+.queContent{
+	padding: 30px  85px ;
+}
+.queContent li.questions-wrap{
+	font-size: 18px;
+    font-weight: 700;
+    padding: 20px 0px 10px 0px;
+}
+.queContent .question-name{
+	padding: 5px 36px ;
+	font-size: 16px ;
+}
+.queContent .option-list{
+	padding: 5px 36px ;
+}
+.queContent .option-list input[type="radio"]{
+	margin-right: 10px ;
+	width: 18px ;
 }
 .file {
     position: relative;

@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>广东省盐业监管服务平台</title>
+<title>天津市外宣门户</title>
 <link rel="Shortcut Icon" href="/static/images/jgqt.ico">
 
 <!-- 未读消息图标css -->
@@ -22,15 +22,12 @@
 		font-weight: 700;
 		line-height: 1;
 		color: #fff;
-		text-align: ce	nter;
+		text-align: center;
 		white-space: nowrap;
 		vertical-align: middle;
 		background-color: #ff7800;
 		border-radius: 10px;
 		margin-left:-8px;
-	}
-	.entry-box>a{
-		height: 57px;
 	}
 	.ds-footer {
 		margin-top: 0;
@@ -55,33 +52,35 @@
 	<script src="/static/js/require.js" data-main="/static/model/home/home.js"></script>
  
 	<jsp:include page="/static/common/header.jsp" />
-	<div class="ds-main container" id="homeBox">
+	<div class="container" id="homeBox">
 		<div class="row clearfix">
-			<div class="index-left">
-				<div class="entry-box" id="linksId">
-				
-				</div>
-				<div id="picplayer" class="slider">
-					<div class="slides clearfix sections">
-						<%--  <li class="" v-for="item in items">
-							<a v-bind:href="'/broadcast/detail?id='+item.id" target="_blank" class="">
-								<img v-bind:alt="item.advTitle" v-bind:src="'${upload_url}/doc/download/'+item.fileIds"/>
-							</a>
-						</li>  --%>
-					</div>
+			
+			<div id="picplayer" class="slider">
+				<div class="slides clearfix sections">
+					<%--  <li class="" v-for="item in items">
+						<a v-bind:href="'/broadcast/detail?id='+item.id" target="_blank" class="">
+							<img v-bind:alt="item.advTitle" v-bind:src="'${upload_url}/doc/download/'+item.fileIds"/>
+						</a>
+					</li>  --%>
 				</div>
 			</div>
+			
+		</div>
+
+		<div class="row bg-white">
+			<div class="entry-box" id="linksId"></div>
 		</div>
 		
-		<div id="newsLatest" class="row clearfix">			 
+		<div class="main">
+			<div id="newsLatest" class="updateNews clearfix" ></div>
+			<div id="columnTwo" class="focusNews clearfix"></div>
 		</div>
-		<div id="columnTwo" class="row clearfix">			 
+		<div class="main">
+			<div id="columnOne" class="pull-left impNews clearfix">			 
+			</div>
+			<div id="columnThr" class="pull-left noticeNews clearfix">
+			</div>
 		</div>
-		<div id="columnOne" class="row clearfix">			 
-		</div>
-		<div id="columnThr" class="row clearfix">
-		</div>
-		
 	</div>
 
 	<jsp:include page="${ctx}/static/common/footer.jsp" />
